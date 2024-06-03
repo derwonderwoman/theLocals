@@ -19,6 +19,7 @@ interface SpecialistData {
     password: string;
     first_name: string;
     last_name: string;
+    gender:string;
     town: string;
     phone_number: string;
     year_of_birth: number;
@@ -59,7 +60,7 @@ export const _login_spec = async (req: Request, res: Response): Promise<void> =>
 };
 
 export const _register_spec = async (req: Request, res: Response): Promise<void> => {
-    const { first_name, last_name, town, phone_number, year_of_birth, email, password, specialisation }: SpecialistData = req.body;
+    const { first_name, last_name, town, phone_number, year_of_birth, email, password, specialisation, gender }: SpecialistData = req.body;
     try {
         const loweremail: string = email.toLowerCase();
 
@@ -71,6 +72,7 @@ export const _register_spec = async (req: Request, res: Response): Promise<void>
             id: newID,
             email: loweremail,
             password: hashpassword,
+            gender,
             first_name,
             last_name,
             town,

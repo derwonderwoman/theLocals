@@ -14,7 +14,7 @@ const LoginClient = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/clients/login", {
+            const response = await axios.post("http://localhost:5000/clients/login", {
                 email,
                 password 
             }, { withCredentials: true });

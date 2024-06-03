@@ -8,6 +8,7 @@ interface ClientData {
     year_of_birth: number;
     email: string;
     password: string;
+    gender: string;
 }
 
 interface Client {
@@ -19,6 +20,7 @@ interface Client {
     year_of_birth: number;
     email: string;
     password: string;
+    gender: string;
 }
 
 export const register = async ({
@@ -28,7 +30,8 @@ export const register = async ({
     phone_number,
     year_of_birth,
     email,
-    password
+    password,
+    gender,
 }: ClientData): Promise<Client> => {
     try {
         const [client]: Client[] = await db("clients")
@@ -39,11 +42,13 @@ export const register = async ({
                 phone_number,
                 year_of_birth,
                 email,
-                password
+                password,
+                gender
             }, [
                 "id",
                 "first_name",
                 "last_name",
+                "gender",
                 "town",
                 "phone_number",
                 "year_of_birth",

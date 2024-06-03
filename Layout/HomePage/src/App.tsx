@@ -9,8 +9,17 @@ import SpecOrders from './components/SpecOrders/SpecOrders';
 import {useState, createContext} from "react";
 import Auth from './Auth/Auth';
 import React from 'react';
-export const AuthContext = createContext(null);
 
+type tokenType = {
+  token: "",
+  setToken: (token: string) => {}, 
+}
+
+type typeType = {
+  type: "", 
+  setType: (type: string) => {} 
+}
+export const AuthContext = createContext<tokenType,typeType>({});
 
 function App() {
   const [token, setToken] = useState<string>("");

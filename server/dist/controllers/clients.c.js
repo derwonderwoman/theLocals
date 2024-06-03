@@ -76,7 +76,7 @@ var _login_client = function (req, res) { return __awaiter(void 0, void 0, void 
                     httpOnly: true,
                     maxAge: 60 * 1000
                 });
-                res.json({ token: accessToken });
+                res.json({ token: accessToken, type: "client" });
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _b.sent();
@@ -89,11 +89,11 @@ var _login_client = function (req, res) { return __awaiter(void 0, void 0, void 
 }); };
 exports._login_client = _login_client;
 var _register_client = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, first_name, last_name, town, phone_number, year_of_birth, email, password, lowerEmail, salt, hashPassword, newID, newClientData, newClient, newResponseClient, error_2;
+    var _a, first_name, last_name, town, phone_number, year_of_birth, email, password, gender, lowerEmail, salt, hashPassword, newID, newClientData, newClient, newResponseClient, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, first_name = _a.first_name, last_name = _a.last_name, town = _a.town, phone_number = _a.phone_number, year_of_birth = _a.year_of_birth, email = _a.email, password = _a.password;
+                _a = req.body, first_name = _a.first_name, last_name = _a.last_name, town = _a.town, phone_number = _a.phone_number, year_of_birth = _a.year_of_birth, email = _a.email, password = _a.password, gender = _a.gender;
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
@@ -106,6 +106,7 @@ var _register_client = function (req, res) { return __awaiter(void 0, void 0, vo
                     email: lowerEmail,
                     password: hashPassword,
                     first_name: first_name,
+                    gender: gender,
                     last_name: last_name,
                     town: town,
                     phone_number: phone_number,
@@ -117,6 +118,7 @@ var _register_client = function (req, res) { return __awaiter(void 0, void 0, vo
                 newResponseClient = {
                     id: newID,
                     email: lowerEmail,
+                    gender: gender,
                     first_name: first_name,
                     last_name: last_name,
                     town: town,

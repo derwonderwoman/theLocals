@@ -14,7 +14,7 @@ const LoginSpec = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/specialists/login", {
+            const response = await axios.post("http://localhost:5000/specialists/login", {
                 email,
                 password 
             }, { withCredentials: true });

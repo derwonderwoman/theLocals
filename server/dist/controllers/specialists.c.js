@@ -73,7 +73,7 @@ var _login_spec = function (req, res) { return __awaiter(void 0, void 0, void 0,
                     httpOnly: true,
                     maxAge: 60 * 1000
                 });
-                res.json({ token: accessToken });
+                res.json({ token: accessToken, type: "specialist" });
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _b.sent();
@@ -86,11 +86,11 @@ var _login_spec = function (req, res) { return __awaiter(void 0, void 0, void 0,
 }); };
 exports._login_spec = _login_spec;
 var _register_spec = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, first_name, last_name, town, phone_number, year_of_birth, email, password, specialisation, loweremail, salt, hashpassword, newID, newSpecData, newSpec, error_2;
+    var _a, first_name, last_name, town, phone_number, year_of_birth, email, password, specialisation, gender, loweremail, salt, hashpassword, newID, newSpecData, newSpec, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, first_name = _a.first_name, last_name = _a.last_name, town = _a.town, phone_number = _a.phone_number, year_of_birth = _a.year_of_birth, email = _a.email, password = _a.password, specialisation = _a.specialisation;
+                _a = req.body, first_name = _a.first_name, last_name = _a.last_name, town = _a.town, phone_number = _a.phone_number, year_of_birth = _a.year_of_birth, email = _a.email, password = _a.password, specialisation = _a.specialisation, gender = _a.gender;
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
@@ -102,6 +102,7 @@ var _register_spec = function (req, res) { return __awaiter(void 0, void 0, void
                     id: newID,
                     email: loweremail,
                     password: hashpassword,
+                    gender: gender,
                     first_name: first_name,
                     last_name: last_name,
                     town: town,

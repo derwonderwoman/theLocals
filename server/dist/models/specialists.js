@@ -40,7 +40,7 @@ exports.login = exports.register = void 0;
 var index_1 = require("../index");
 var register = function (_a) { return __awaiter(void 0, [_a], void 0, function (_b) {
     var specialist, error_1;
-    var first_name = _b.first_name, last_name = _b.last_name, town = _b.town, phone_number = _b.phone_number, year_of_birth = _b.year_of_birth, email = _b.email, password = _b.password, specialisation = _b.specialisation;
+    var first_name = _b.first_name, last_name = _b.last_name, town = _b.town, phone_number = _b.phone_number, year_of_birth = _b.year_of_birth, email = _b.email, password = _b.password, specialisation = _b.specialisation, gender = _b.gender;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -50,6 +50,7 @@ var register = function (_a) { return __awaiter(void 0, [_a], void 0, function (
                         last_name: last_name,
                         town: town,
                         phone_number: phone_number,
+                        gender: gender,
                         year_of_birth: year_of_birth,
                         email: email,
                         password: password,
@@ -59,6 +60,7 @@ var register = function (_a) { return __awaiter(void 0, [_a], void 0, function (
                         "first_name",
                         "last_name",
                         "town",
+                        "gender",
                         "phone_number",
                         "year_of_birth",
                         "email",

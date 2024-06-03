@@ -4,6 +4,7 @@ interface SpecialistData {
     first_name: string;
     last_name: string;
     town: string;
+    gender: string;
     phone_number: string;
     year_of_birth: number;
     email: string;
@@ -16,6 +17,7 @@ interface Specialist {
     first_name: string;
     last_name: string;
     town: string;
+    gender: string;
     phone_number: string;
     year_of_birth: number;
     email: string;
@@ -31,7 +33,8 @@ export const register = async ({
     year_of_birth,
     email,
     password,
-    specialisation
+    specialisation,
+    gender
 }: SpecialistData): Promise<Specialist> => {
     try {
         const [specialist]: Specialist[] = await db("specialists").insert({
@@ -39,6 +42,7 @@ export const register = async ({
             last_name,
             town,
             phone_number,
+            gender,
             year_of_birth,
             email,
             password,
@@ -48,6 +52,7 @@ export const register = async ({
             "first_name",
             "last_name",
             "town",
+            "gender",
             "phone_number",
             "year_of_birth",
             "email",

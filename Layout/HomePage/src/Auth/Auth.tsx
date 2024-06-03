@@ -2,10 +2,8 @@ import { useContext, useEffect, useState, ReactNode } from "react";
 import { AuthContext } from "../App";
 import axios from "axios";
 import LoginClient from "../components/LoginClient/LoginClient"; 
-import dotenv from "dotenv";
 import LoginSpec from "../components/LoginSpec/LoginSpec";
 
-dotenv.config();
 
 interface AuthProps {
     children: ReactNode;

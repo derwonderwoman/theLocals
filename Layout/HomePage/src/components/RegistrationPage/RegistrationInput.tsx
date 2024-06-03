@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import Title from '../HomePage/Title';
+import { useNavigate } from "react-router-dom";
 
 
 const RegistrationInput = () => {
@@ -15,6 +16,42 @@ const RegistrationInput = () => {
     const [password, setPassword] = useState<string>("");
     const [type, setType] = useState<string>("client");
     const [services, setServices] = useState<string[]>([]);
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:5000/register", {
+                firstName,
+                lastName,
+                selectedCity,
+                phone,
+                year,
+                email,
+                password,
+                type
+            }, { withCredentials: true });
+
+            if (response.status === 200) {
+                alert("Registration successful!");
+
+                setFirstName("");
+                setLastName("");
+                setYear(undefined);
+                setGender("");
+                setSelectedCity("");
+                setPhone("");
+                setEmail("");
+                setPassword("");
+                setType("client");
+                setServices([]);
+                navigate("/");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Registration failed. Please try again later.");
+        }
+    };
 
 
     useEffect(() => {
@@ -52,6 +89,7 @@ const RegistrationInput = () => {
         <Title/>
         <div className="registration-form">
             <h1>Registration Form</h1>
+            <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
                 <input id="firstName" className="form-control" type="text" placeholder="Enter your first name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
@@ -112,6 +150,7 @@ const RegistrationInput = () => {
                 )}
             </div>
             <button type="submit" className="btn btn-primary">Register</button>
+            </form>
         </div>
         </>
     )

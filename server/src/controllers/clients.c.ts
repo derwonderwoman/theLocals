@@ -18,6 +18,7 @@ interface ClientData {
     id: number | string;
     email: string;
     password: string;
+    gender: string;
     first_name: string;
     last_name: string;
     town: string;
@@ -29,6 +30,7 @@ interface ResponseClientData {
     id: number | string;
     email: string;
     first_name: string;
+    gender: string;
     last_name: string;
     town: string;
     phone_number: string;
@@ -73,7 +75,7 @@ export const _login_client = async (req: Request, res: Response): Promise<void> 
 };
 
 export const _register_client = async (req: Request, res: Response): Promise<void> => {
-    const { first_name, last_name, town, phone_number, year_of_birth, email, password }: ClientData = req.body;
+    const { first_name, last_name, town, phone_number, year_of_birth, email, password, gender }: ClientData = req.body;
     
     try {
         const lowerEmail: string = email.toLowerCase();
@@ -88,6 +90,7 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
             email: lowerEmail,
             password: hashPassword,
             first_name,
+            gender,
             last_name,
             town,
             phone_number,
@@ -99,6 +102,7 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
         const newResponseClient: ResponseClientData = {
             id: newID,
             email: lowerEmail,
+            gender,
             first_name,
             last_name,
             town,
