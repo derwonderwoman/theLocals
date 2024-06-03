@@ -9,14 +9,15 @@ import SpecOrders from './components/SpecOrders/SpecOrders';
 import {useState, createContext} from "react";
 import Auth from './Auth/Auth';
 import React from 'react';
-export const AuthContext = createContext({token: "", type: ""});
+export const AuthContext = createContext(null);
 
 
 function App() {
-  const [token, setToken] = useState<string>("")
+  const [token, setToken] = useState<string>("");
+  const[type, setType] = useState<string>("");
 
   return (
-    <AuthContext.Provider value = {{token, setToken as  React.Dispatch<React.SetStateAction<string>>}}>
+    <AuthContext.Provider value = {{token, setToken, type, setType}}>
     <div>
       <Routes>
         <Route path = "/" element = {<Home/>}/>

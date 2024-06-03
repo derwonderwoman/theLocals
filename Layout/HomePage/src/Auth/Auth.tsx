@@ -38,7 +38,7 @@ const Auth = ({ children }: AuthProps) => {
         }
     };
 
-    return redirect ? <>{children}</> : type === "client" ? <LoginClient page="Login"/> : <LoginSpec page="Login"/>;
+    return redirect ? <>{children}</> : type === "client" ? <LoginClient/> : <LoginSpec/>;
 };
 
 export default Auth;

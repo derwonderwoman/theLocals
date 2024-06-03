@@ -4,12 +4,8 @@ import axios from "axios";
 import { AuthContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 
-interface LoginSpecProps {
-    page: string;
-};
 
-
-const LoginSpec: React.FC<LoginSpecProps> = ({ page }) => {
+const LoginSpec = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const { setToken } = useContext(AuthContext);
