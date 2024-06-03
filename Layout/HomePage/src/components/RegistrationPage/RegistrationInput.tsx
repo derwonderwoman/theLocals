@@ -28,7 +28,8 @@ const RegistrationInput = () => {
                     }
                 });
                 const data = response.data.geonames.map((city: any) => city.name);
-                setIsraeliCities(data);
+                const uniqueCities : string[] = Array.from(new Set(data));
+                setIsraeliCities(uniqueCities);
             } catch (error) {
                 console.error('Error fetching Israeli cities:', error);
             }

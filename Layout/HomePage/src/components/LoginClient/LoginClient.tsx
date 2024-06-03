@@ -1,9 +1,11 @@
 import { useState} from 'react';
 import Title from '../HomePage/Title';
 
-const LoginClient = () => {
+const LoginClient = ({page}) => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
+    
 
     return (
         <>
