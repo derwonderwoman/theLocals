@@ -3,9 +3,7 @@ import Title from '../HomePage/Title';
 import axios from "axios";
 import { AuthContext } from '../../App';
 import { useNavigate } from "react-router-dom";
-// import dotenv from "dotenv";
-// dotenv.config();
-
+import { BASE_URL } from '../../config';
 
 const LoginClient = () => {
     const [email, setEmail] = useState<string>("");
@@ -16,7 +14,7 @@ const LoginClient = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.BASE_URL}/client/login`, {
+            const response = await axios.post(`${BASE_URL}/client/login`, {
                 email,
                 password 
             }, { withCredentials: true });

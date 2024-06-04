@@ -2,10 +2,7 @@ import axios from 'axios';
 import { useState, useEffect, FormEvent } from 'react';
 import Title from '../HomePage/Title';
 import { useNavigate } from "react-router-dom";
-// import dotenv from "dotenv";
-// dotenv.config();
-
-const CITIES:string = process.env.ISRAEL_CITIES || "";
+import { BASE_URL, ISRAEL_CITIES } from '../../config';
 
 
 const RegistrationInput = () => {
@@ -25,7 +22,7 @@ const RegistrationInput = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.BASE_URL}/${type}/login`, {
+            const response = await axios.post(`${BASE_URL}/${type}/login`, {
                 first_name,
                 last_name,
                 town,
@@ -61,16 +58,9 @@ const RegistrationInput = () => {
 
     useEffect(() => {
         const fetchCities = async () => {
-
             try {
-                const response = await axios.post(CITIES, {
-                    data: {
-                        country: 'israel',
-                    }
-                });
-                console.log(response.data);
-                
-                setIsraeliCities(response.data);
+                const response = await axios.get(ISRAEL_CITIES);                
+                setIsraeliCities(response.data.data);
             } catch (error) {
                 console.error('Error fetching Israeli cities:', error);
             }

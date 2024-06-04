@@ -2,8 +2,9 @@ import { useState, useEffect} from 'react';
 import Title from '../HomePage/Title';
 import axios from 'axios';
 import OrdersList from './OrdersList';
+import { ISRAEL_CITIES } from '../../config';
 
-const CITIES:string = process.env.ISRAEL_CITIES || "";
+
 
 const Application = () => {
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
@@ -18,14 +19,9 @@ const Application = () => {
 
     useEffect(() => {
         const fetchCities = async () => {
-
             try {
-                const response = await axios.post(CITIES, {
-                    data: {
-                        country: 'israel',
-                    }
-                });
-                setIsraeliCities(response.data);
+                const response = await axios.get(ISRAEL_CITIES);                
+                setIsraeliCities(response.data.data);
             } catch (error) {
                 console.error('Error fetching Israeli cities:', error);
             }
