@@ -68,6 +68,8 @@ const RegistrationInput = () => {
                         country: 'israel',
                     }
                 });
+                console.log(response.data);
+                
                 setIsraeliCities(response.data);
             } catch (error) {
                 console.error('Error fetching Israeli cities:', error);

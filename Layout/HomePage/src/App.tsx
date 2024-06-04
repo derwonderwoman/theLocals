@@ -28,9 +28,9 @@ function App() {
     <div>
       <Routes>
         <Route path = "/" element = {<Home/>}/>
-        <Route path = "client/login" element = {<LoginClient/>}/>
+        <Route path = "/client/login" element = {<LoginClient/>}/>
         <Route path ='/register' element = {<RegistrationInput/>}/>
-        <Route path = "specialist/login" element = {<LoginSpec/>}/>
+        <Route path = "/specialist/login" element = {<LoginSpec/>}/>
       </Routes>
     </div>
     </AuthContext.Provider>
