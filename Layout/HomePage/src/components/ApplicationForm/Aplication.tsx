@@ -18,7 +18,7 @@ const Application = () => {
         const fetchCities = async () => {
 
             try {
-                const response = await axios.get('http://api.geonames.org/searchJSON', {
+                const response = await axios.get('https://api.geonames.org/searchJSON', {
                     params: {
                         country: 'IL',
                         username: 'derwonderwoman', 
