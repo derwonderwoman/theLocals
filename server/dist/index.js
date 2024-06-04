@@ -30,8 +30,8 @@ app.use((0, cors_1.default)({
     origin: "http://localhost:5173",
     credentials: true,
 }));
-app.use("/clients", clients_r_1.default);
-app.use("/specialists", specialists_r_1.default);
+app.use("/client", clients_r_1.default);
+app.use("/specialist", specialists_r_1.default);
 var PORT = process.env.PORT || 5000;
 app.listen(PORT, function () {
     console.log("Server is running on port ".concat(PORT));

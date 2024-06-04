@@ -14,7 +14,7 @@ const LoginClient = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/clients/login", {
+            const response = await axios.post("http://localhost:5000/client/login", {
                 email,
                 password 
             }, { withCredentials: true });
@@ -33,7 +33,7 @@ const LoginClient = () => {
         <>
             <Title/>
             <div className='login-container'>
-                <h1> Login </h1>
+                <h1> Login for a client</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
@@ -45,6 +45,9 @@ const LoginClient = () => {
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
+                <hr />
+                <h2> Please login first and we will find you your best match!</h2>
+                <h3>If you are not registered yet, please sign in <a href='/register'>here</a></h3>
             </div>
         </>
     );

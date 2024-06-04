@@ -29,8 +29,8 @@ app.use(cors({
     credentials:true,
 }));
 
-app.use("/clients", client_router)
-app.use("/specialists", spec_router)
+app.use("/client", client_router)
+app.use("/specialist", spec_router)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

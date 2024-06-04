@@ -6,35 +6,35 @@ import { useNavigate } from "react-router-dom";
 
 const RegistrationInput = () => {
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
-    const [selectedCity, setSelectedCity] = useState<string>("");
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
-    const [year, setYear] = useState<number>();
+    const [town, setSelectedCity] = useState<string>("");
+    const [first_name, setFirstName] = useState<string>("");
+    const [last_name, setLastName] = useState<string>("");
+    const [year_of_birth, setYear] = useState<number>();
     const [gender, setGender] = useState<string>("");
-    const [phone, setPhone] = useState<string>("");
+    const [phone_number, setPhone] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [type, setType] = useState<string>("client");
-    const [services, setServices] = useState<string[]>([]);
+    const [specialisation, setServices] = useState<string[]>([]);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/register", {
-                firstName,
-                lastName,
-                selectedCity,
-                phone,
-                year,
+            const response = await axios.post(`http://localhost:5000/${type}/register`, {
+                first_name,
+                last_name,
+                town,
+                phone_number,
+                year_of_birth,
                 email,
                 password,
-                type
+                type,
+                specialisation
             }, { withCredentials: true });
 
             if (response.status === 200) {
                 alert("Registration successful!");
-
                 setFirstName("");
                 setLastName("");
                 setYear(undefined);
@@ -45,6 +45,7 @@ const RegistrationInput = () => {
                 setPassword("");
                 setType("client");
                 setServices([]);
+
                 navigate("/");
             }
         } catch (error) {
@@ -77,10 +78,10 @@ const RegistrationInput = () => {
 
     const handleServiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        if (services.includes(value)) {
-            setServices(services.filter(service => service !== value));
+        if (specialisation.includes(value)) {
+            setServices(specialisation.filter(service => service !== value));
         } else {
-            setServices([...services, value]);
+            setServices([...specialisation, value]);
         }
     };
 
@@ -92,15 +93,15 @@ const RegistrationInput = () => {
             <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
-                <input id="firstName" className="form-control" type="text" placeholder="Enter your first name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                <input id="firstName" className="form-control" type="text" placeholder="Enter your first name" value={first_name} onChange={(e) => setFirstName(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="lastName">Last Name</label>
-                <input id="lastName" className="form-control" type="text" placeholder="Enter your last name" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                <input id="lastName" className="form-control" type="text" placeholder="Enter your last name" value={last_name} onChange={(e) => setLastName(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="yearOfBirth">Year of Birth</label>
-                <input id="yearOfBirth" className="form-control" type="number" placeholder="Enter your year of birth" value={year} onChange={(e) => setYear(parseInt(e.target.value))} required />
+                <input id="yearOfBirth" className="form-control" type="number" placeholder="Enter your year of birth" value={year_of_birth} onChange={(e) => setYear(parseInt(e.target.value))} required />
             </div>
             <div className="form-group">
                 <label htmlFor="gender">Gender</label>
@@ -112,7 +113,7 @@ const RegistrationInput = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="city">City</label>
-                <select id="city" className="form-control" value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)}>
+                <select id="city" className="form-control" value={town} onChange={(e) => setSelectedCity(e.target.value)}>
                     <option value="">Select City</option>
                     {israeliCities.map(city => (
                         <option key={city} value={city}>{city}</option>
@@ -121,7 +122,7 @@ const RegistrationInput = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="mobilePhone">Mobile Phone</label>
-                <input id="mobilePhone" className="form-control" type="tel" placeholder="Enter your mobile phone number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+                <input id="mobilePhone" className="form-control" type="tel" placeholder="Enter your mobile phone number" value={phone_number} onChange={(e) => setPhone(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -140,11 +141,11 @@ const RegistrationInput = () => {
                 {type === "specialist" && (
                     <div className="form-group">
                     <label>Services Offered</label><br />
-                    <input type="checkbox" id="cleaning" value="cleaning" checked={services.includes("cleaning")} onChange={handleServiceChange} />
+                    <input type="checkbox" id="cleaning" value="cleaning" checked={specialisation.includes("cleaning")} onChange={handleServiceChange} />
                     <label htmlFor="cleaning">Cleaning</label>
-                    <input type="checkbox" id="babysitting" value="babysitting" checked={services.includes("babysitting")} onChange={handleServiceChange} />
+                    <input type="checkbox" id="babysitting" value="babysitting" checked={specialisation.includes("babysitting")} onChange={handleServiceChange} />
                     <label htmlFor="babysitting">Babysitting</label>
-                    <input type="checkbox" id="cooking" value="cooking" checked={services.includes("cooking")} onChange={handleServiceChange} />
+                    <input type="checkbox" id="cooking" value="cooking" checked={specialisation.includes("cooking")} onChange={handleServiceChange} />
                     <label htmlFor="cooking">Preparing Food</label>
                 </div>
                 )}
