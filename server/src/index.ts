@@ -1,6 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors from "cors";
+// import cors from "cors";
 import dotenv from "dotenv";
 import knex from "knex";
 import client_router from "./routers/clients.r";
@@ -24,10 +24,10 @@ export const db = knex({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials:true,
-}));
+// app.use(cors({
+//     origin: "http://localhost:5173",
+//     credentials:true,
+// }));
 
 app.use("/client", client_router)
 app.use("/specialist", spec_router)
