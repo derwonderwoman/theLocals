@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState, useEffect, FormEvent } from 'react';
 import Title from '../HomePage/Title';
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const RegistrationInput = () => {
@@ -21,7 +23,7 @@ const RegistrationInput = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:5000/${type}/register`, {
+            const response = await axios.post(`${process.env.BASE_URL}/${type}/login`, {
                 first_name,
                 last_name,
                 town,
