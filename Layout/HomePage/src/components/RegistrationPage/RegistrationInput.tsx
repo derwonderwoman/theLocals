@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useState, useEffect, FormEvent } from 'react';
 import Title from '../HomePage/Title';
 import { useNavigate } from "react-router-dom";
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 
 const RegistrationInput = () => {
