@@ -22,7 +22,7 @@ const RegistrationInput = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${BASE_URL}/${type}/login`, {
+            const response = await axios.post(`${BASE_URL}/${type}/register`, {
                 first_name,
                 last_name,
                 town,
