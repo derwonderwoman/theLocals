@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 // import dotenv from "dotenv";
 // dotenv.config();
 
+const CITIES:string = process.env.ISRAEL_CITIES || "";
+
 
 const RegistrationInput = () => {
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
@@ -61,15 +63,12 @@ const RegistrationInput = () => {
         const fetchCities = async () => {
 
             try {
-                const response = await axios.get('https://api.geonames.org/searchJSON', {
-                    params: {
-                        country: 'IL',
-                        username: 'derwonderwoman', 
+                const response = await axios.post(CITIES, {
+                    data: {
+                        country: 'israel',
                     }
                 });
-                const data = response.data.geonames.map((city: any) => city.name);
-                const uniqueCities : string[] = Array.from(new Set(data));
-                setIsraeliCities(uniqueCities);
+                setIsraeliCities(response.data);
             } catch (error) {
                 console.error('Error fetching Israeli cities:', error);
             }

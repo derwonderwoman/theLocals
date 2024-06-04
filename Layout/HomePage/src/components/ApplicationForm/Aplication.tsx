@@ -3,6 +3,8 @@ import Title from '../HomePage/Title';
 import axios from 'axios';
 import OrdersList from './OrdersList';
 
+const CITIES:string = process.env.ISRAEL_CITIES || "";
+
 const Application = () => {
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
     const [selectedCity, setSelectedCity] = useState<string>("");
@@ -18,15 +20,12 @@ const Application = () => {
         const fetchCities = async () => {
 
             try {
-                const response = await axios.get('https://api.geonames.org/searchJSON', {
-                    params: {
-                        country: 'IL',
-                        username: 'derwonderwoman', 
+                const response = await axios.post(CITIES, {
+                    data: {
+                        country: 'israel',
                     }
                 });
-                const data = response.data.geonames.map((city: any) => city.name);
-                const uniqueCities : string[] = Array.from(new Set(data));
-                setIsraeliCities(uniqueCities);
+                setIsraeliCities(response.data);
             } catch (error) {
                 console.error('Error fetching Israeli cities:', error);
             }
