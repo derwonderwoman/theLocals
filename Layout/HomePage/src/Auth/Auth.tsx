@@ -4,7 +4,6 @@ import axios from "axios";
 import LoginClient from "../components/LoginClient/LoginClient"; 
 import LoginSpec from "../components/LoginSpec/LoginSpec";
 
-
 interface AuthProps {
     children: ReactNode;
 }
@@ -13,7 +12,6 @@ interface Token {
     token: string | null;
     type: string;
 }
-
 const Auth = ({ children }: AuthProps) => {
     const { token, type} = useContext(AuthContext) as Token;
     const [redirect, setRedirect] = useState<boolean>(false);
