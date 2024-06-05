@@ -12,6 +12,6 @@ router.get("/verify",verifyToken, (req,res) => {
 }
 );
 router.post("/application", _application);
-router.get("/orderstatus",  )
+// router.get("/orderstatus",  )
 
 export default router;

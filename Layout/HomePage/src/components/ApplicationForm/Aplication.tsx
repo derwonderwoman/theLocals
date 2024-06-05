@@ -37,6 +37,7 @@ const Application = () => {
             }, { withCredentials: true });
 
             if (response.status === 200) {
+                alert(`Your order #${response.data.id}  was succesfully created`);
                 navigate("/client/orderstatus"); 
             }
         } catch (error) {
@@ -92,7 +93,7 @@ const Application = () => {
             </div>
             <div>
                 <div className="form-group">
-                <label htmlFor="rate">How much are you ready to pay? (if you don't know-leave it empty)</label>
+                <label htmlFor="rate">How much are you ready to pay? (if you don't know-make it 00:00)</label>
                 <input id="rate" className="form-control" type="number" placeholder="Rate per hour" value={rate_per_hour} onChange={(e) => setRate(parseInt(e.target.value))}/>
             </div>
             </div>
