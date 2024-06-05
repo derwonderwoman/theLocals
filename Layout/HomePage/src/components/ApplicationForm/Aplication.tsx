@@ -37,7 +37,7 @@ const Application = () => {
             }, { withCredentials: true });
 
             if (response.status === 200) {
-                // alert(`Your order #${response.data.id}  was succesfully created`);
+                alert(`Your order #${response.data.id}  was succesfully created`);
                 // navigate("/client/orderstatus"); 
             }
         } catch (error) {
