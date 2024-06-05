@@ -18,10 +18,10 @@ interface ApplicationController {
     status:string
 };
 
-interface DecodedToken {
-    id: string;
-    email: string;
-}
+export interface DecodedToken extends jwt.JwtPayload {
+    id?: string;
+    email?: string;
+  }
 
 interface ClientData {
     id?: string | number;

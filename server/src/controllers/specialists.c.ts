@@ -7,10 +7,10 @@ dotenv.config();
 
 const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
 
-interface DecodedToken {
-    id: string;
-    email: string;
-}
+export interface DecodedToken extends jwt.JwtPayload {
+    id?: string;
+    email?: string;
+  }
 
 interface SpecialistData {
     id?: string | number;
