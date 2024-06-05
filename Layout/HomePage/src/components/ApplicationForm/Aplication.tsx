@@ -4,7 +4,7 @@ import axios from 'axios';
 import OrdersList from './OrdersList';
 import { ISRAEL_CITIES } from '../../config';
 import { BASE_URL } from '../../config';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
 
@@ -21,7 +21,7 @@ const Application = () => {
     const services = ["Cleaning", "Babysitting", "Preparing food"];
     const first_name = localStorage.getItem("first_name");
     const client_id = localStorage.getItem("client_id");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
