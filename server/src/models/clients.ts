@@ -2,12 +2,13 @@ import { db } from "../index";
 
 interface Application {
     client_id: number | string;
-    town:string,
-    specialisation:string,
-    date:Date,
-    time:string,
-    rate_per_hour:number,
-    status:string
+    town:string;
+    specialisation:string;
+    date:Date;
+    time:string;
+    rate_per_hour:number;
+    status:string;
+    specialist_id: number | string;
 }
 
 interface ClientData {
@@ -92,10 +93,12 @@ export const application = async ({
     date,
     time,
     rate_per_hour,
-    status
+    status,
+    specialist_id,
 }: Application): Promise<Application> => {
     try {
         const [application]: Application[] = await db("applications").insert({
+                specialist_id,
                 client_id,
                 town,
                 specialisation,
@@ -104,6 +107,7 @@ export const application = async ({
                 rate_per_hour,
                 status
             }, [
+                "specialist_id",
                 "client_id",
                 "specialisation",
                 "date",

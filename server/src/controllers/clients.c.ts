@@ -9,13 +9,14 @@ dotenv.config();
 const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
 
 interface ApplicationController {
-    client_id: string | number,
-    town:string,
-    specialisation:string,
-    date:Date,
-    time:string,
-    rate_per_hour:number,
-    status:string
+    client_id: string | number;
+    specialist_id: string | number;
+    town:string;
+    specialisation:string;
+    date:Date;
+    time:string;
+    rate_per_hour:number;
+    status:string;
 };
 
 export interface DecodedToken extends jwt.JwtPayload {
@@ -104,11 +105,12 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
 
 
 export const _application = async (req: Request, res: Response): Promise<void> => {
-    const { town, specialisation, date, time, rate_per_hour, status, client_id}: ApplicationController = req.body;
+    const { town, specialisation, date, time, rate_per_hour, status, client_id, specialist_id}: ApplicationController = req.body;
     
     try {
 
         const newApplication: ApplicationController = {
+            specialist_id,
             client_id,
             town,
             specialisation,
