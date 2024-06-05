@@ -4,6 +4,7 @@ import axios from 'axios';
 import OrdersList from './OrdersList';
 import { ISRAEL_CITIES } from '../../config';
 import { BASE_URL } from '../../config';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -22,6 +23,7 @@ const Application = () => {
     const client_id = localStorage.getItem("client_id");
 
     const handleSubmit = async (e: FormEvent) => {
+        const navigate = useNavigate();
         e.preventDefault();
         try {
             const response = await axios.post(`${BASE_URL}/client/application`, {
@@ -35,7 +37,7 @@ const Application = () => {
             }, { withCredentials: true });
 
             if (response.status === 200) {
-                
+                navigate("/client/orderstatus"); 
             }
         } catch (error) {
             console.error('Error submitting application: ', error);

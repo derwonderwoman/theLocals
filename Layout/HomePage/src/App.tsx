@@ -6,6 +6,7 @@ import LoginSpec from './components/LoginSpec/LoginSpec';
 import RegistrationInput from './components/RegistrationPage/RegistrationInput';
 import Application from './components/ApplicationForm/Aplication';
 import {useState, createContext} from "react";
+import OrderStatus from './components/ApplicationForm/OrderStatus';
 // import Auth from './Auth/Auth';
 
 export type TokenType = {
@@ -34,6 +35,7 @@ function App() {
         <Route path ='/register' element = {<RegistrationInput/>}/>
         <Route path = "/specialist/login" element = {<LoginSpec/>}/>
         <Route path = "/client/application" element = {<Application/>}/>
+        <Route path = "/client/orderstatus" element = {<OrderStatus/>}/>
       </Routes>
     </div>
     </AuthContext.Provider>
