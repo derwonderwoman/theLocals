@@ -44,8 +44,7 @@ export const register = async ({
     gender,
 }: ClientData): Promise<Client> => {
     try {
-        const [client]: Client[] = await db("clients")
-            .insert({
+        const [client]: Client[] = await db("clients").insert({
                 first_name,
                 last_name,
                 town,
@@ -96,8 +95,7 @@ export const application = async ({
     status
 }: Application): Promise<Application> => {
     try {
-        const [application]: Application[] = await db("applications")
-            .insert({
+        const [application]: Application[] = await db("applications").insert({
                 client_id,
                 town,
                 specialisation,
