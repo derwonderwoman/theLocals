@@ -125,12 +125,12 @@ export const application = async ({
     }
 }
 
-export const orderStatus = async ({}): Promise<Client> => {
-    try {
+// export const orderStatus = async ({}): Promise<Client> => {
+//     try {
         
-    } catch (error) {
-        console.error(error);
-        throw new Error("orderStatus error");
-    }
-}
+//     } catch (error) {
+//         console.error(error);
+//         throw new Error("orderStatus error");
+//     }
+// }
 
