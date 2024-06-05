@@ -21,6 +21,11 @@ interface ClientData {
     gender: string;
 }
 
+interface Order {
+    id: string | number;
+    status: string;
+}
+
 interface Client {
     id: string | number;
     first_name: string;
@@ -117,6 +122,15 @@ export const application = async ({
     } catch (error) {
         console.error(error);
         throw new Error('application error');
+    }
+}
+
+export const orderStatus = async ({}): Promise<Client> => {
+    try {
+        
+    } catch (error) {
+        console.error(error);
+        throw new Error("orderStatus error");
     }
 }
 
