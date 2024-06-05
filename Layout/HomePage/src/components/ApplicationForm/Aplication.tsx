@@ -14,7 +14,7 @@ const Application = () => {
     const [date, setDate] = useState<Date>(new Date());
     const [time, setSelectedTime] = useState<string>("");
     const [rate_per_hour, setRate] = useState<number>();
-    const [status, setStatus] = useState<string>("pending");
+    // const [status, setStatus] = useState<string>("pending");
 
 
     const services = ["Cleaning", "Babysitting", "Preparing food"];
@@ -30,7 +30,7 @@ const Application = () => {
                 date,
                 time,
                 rate_per_hour,
-                status,
+                status:'pending',
                 client_id  
             }, { withCredentials: true });
 
