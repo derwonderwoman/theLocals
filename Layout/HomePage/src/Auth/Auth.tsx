@@ -15,31 +15,25 @@ interface Token {
 }
 const Auth = ({ children }: AuthProps) => {
     const { token, type} = useContext(AuthContext) as Token;
-    const [redirect, setRedirect] = useState<boolean>(false);
+    const nav = useNavigate();
 
     useEffect(() => {
         verify();
     }, []);
 
     const verify = async () => {
-        try {
-            const response = await axios.get(`${process.env.BASE_URL}/${type}/verify`, {
-                headers: {
-                    "x-access-token": token
-                },
-                withCredentials: true,
-            });
-            if (response.status === 200) setRedirect(true);
-        } catch (error) {
-            setRedirect(false);
+        const response = await axios.get(`${process.env.BASE_URL}/${type}/verify`, {
+            headers: {
+                "x-access-token": token
+            },
+            withCredentials: true,
+        });
+        if (response.status != 200) {
+            type === "client" ? nav("/client/login") : nav("/specialist/login")
         }
     };
 
-    const nav = useNavigate();
-
-    
-
-    return redirect ? <>{children}</> : type === "client" ? nav("/client/login") : nav("/specialist/login");
+    return <>{children}</> 
 };
 
 export default Auth;
