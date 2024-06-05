@@ -1,6 +1,7 @@
 import { db } from "../index";
 
 interface Application {
+    id?: number;
     client_id: number | string;
     town:string;
     specialisation:string;
@@ -109,6 +110,7 @@ export const application = async ({
                 rate_per_hour,
                 status
             }, [
+                "id",
                 "client_id",
                 "specialisation",
                 "date",

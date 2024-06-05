@@ -9,6 +9,7 @@ dotenv.config();
 const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
 
 interface ApplicationController {
+    id?: number;
     client_id: string | number;
     town:string;
     specialisation:string;
@@ -119,7 +120,6 @@ export const _application = async (req: Request, res: Response): Promise<void> =
         };
 
         const myApp: ApplicationController = await application(newApplication);
-
         res.json(myApp);
     } catch (error) {
         console.error("_application", error);
