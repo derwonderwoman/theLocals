@@ -29,7 +29,7 @@ function App() {
     <AuthContext.Provider value={{ token, setToken, type, setType }}>
     <div>
       <Routes>
-        <Route path = "/" element = {<Auth><Home/></Auth>}/>
+        <Route path = "/" element = {<Home/>}/>
         <Route path = "/client/login" element = {<LoginClient/>}/>
         <Route path ='/register' element = {<RegistrationInput/>}/>
         <Route path = "/specialist/login" element = {<LoginSpec/>}/>
