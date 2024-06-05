@@ -13,7 +13,7 @@ export interface DecodedToken extends jwt.JwtPayload {
   }
 
 interface SpecialistData {
-    id?: string | number;
+    id?: number;
     email: string;
     password: string;
     first_name: string;

@@ -13,7 +13,7 @@ interface SpecialistData {
 }
 
 interface Specialist {
-    id: string | number;
+    id: number;
     first_name: string;
     last_name: string;
     town: string;
@@ -48,6 +48,7 @@ export const register = async ({
             password,
             specialisation
         }, [
+            "id",
             "first_name",
             "last_name",
             "town",

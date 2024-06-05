@@ -10,7 +10,7 @@ const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
 
 interface ApplicationController {
     id?: number;
-    client_id: string | number;
+    client_id: number;
     town:string;
     specialisation:string;
     date:Date;
@@ -25,7 +25,7 @@ export interface DecodedToken extends jwt.JwtPayload {
   }
 
 interface ClientData {
-    id?: string | number;
+    id?: number;
     email: string;
     password: string;
     gender: string;

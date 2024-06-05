@@ -2,7 +2,7 @@ import { db } from "../index";
 
 interface Application {
     id?: number;
-    client_id: number | string;
+    client_id: number;
     town:string;
     specialisation:string;
     date:Date;
@@ -28,7 +28,7 @@ interface Order {
 }
 
 interface Client {
-    id: string | number;
+    id: number;
     first_name: string;
     last_name: string;
     town: string;
@@ -60,6 +60,7 @@ export const register = async ({
                 password,
                 gender
             }, [
+                "id",
                 "first_name",
                 "last_name",
                 "gender",
