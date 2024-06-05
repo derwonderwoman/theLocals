@@ -7,7 +7,7 @@ import RegistrationInput from './components/RegistrationPage/RegistrationInput';
 import Application from './components/ApplicationForm/Aplication';
 import {useState, createContext} from "react";
 import OrderStatus from './components/ApplicationForm/OrderStatus';
-// import Auth from './Auth/Auth';
+import Auth from './Auth/Auth';
 
 export type TokenType = {
   token: string;
@@ -34,7 +34,7 @@ function App() {
         <Route path = "/client/login" element = {<LoginClient/>}/>
         <Route path ='/register' element = {<RegistrationInput/>}/>
         <Route path = "/specialist/login" element = {<LoginSpec/>}/>
-        <Route path = "/client/application" element = {<Application/>}/>
+        <Route path = "/client/application" element = {<Auth><Application/></Auth>}/>
         <Route path = "/client/orderstatus" element = {<OrderStatus/>}/>
       </Routes>
     </div>
