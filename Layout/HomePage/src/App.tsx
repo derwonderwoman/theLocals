@@ -33,7 +33,7 @@ function App() {
         <Route path = "/client/login" element = {<LoginClient/>}/>
         <Route path ='/register' element = {<RegistrationInput/>}/>
         <Route path = "/specialist/login" element = {<LoginSpec/>}/>
-        <Route path = "/client/application" element = {<Auth><Application/></Auth>}/>
+        <Route path = "/client/application" element = {<Application/>}/>
       </Routes>
     </div>
     </AuthContext.Provider>
