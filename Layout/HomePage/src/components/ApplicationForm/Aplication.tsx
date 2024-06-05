@@ -1,21 +1,46 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import Title from '../HomePage/Title';
 import axios from 'axios';
 import OrdersList from './OrdersList';
 import { ISRAEL_CITIES } from '../../config';
+import { BASE_URL } from '../../config';
 
 
 
 const Application = () => {
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
-    const [selectedCity, setSelectedCity] = useState<string>("");
-    const [type, setType] = useState<string>("")
+    const [town, setSelectedCity] = useState<string>("");
+    const [specialisation, setType] = useState<string>("")
     const [date, setDate] = useState<Date>(new Date());
-    const [selectedTime, setSelectedTime] = useState<string>("");
-    const [rate, setRate] = useState<number>();
+    const [time, setSelectedTime] = useState<string>("");
+    const [rate_per_hour, setRate] = useState<number>();
+    const [status, setStatus] = useState<string>("pending");
 
 
     const services = ["Cleaning", "Babysitting", "Preparing food"];
+    const first_name = localStorage.getItem("first_name");
+    const client_id = localStorage.getItem("client_id");
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(`${BASE_URL}/client/application`, {
+                town,
+                specialisation,
+                date,
+                time,
+                rate_per_hour,
+                status,
+                client_id  
+            }, { withCredentials: true });
+
+            if (response.status === 200) {
+                
+            }
+        } catch (error) {
+            console.error('Error submitting application: ', error);
+        }
+    };
 
     useEffect(() => {
         const fetchCities = async () => {
@@ -35,9 +60,11 @@ const Application = () => {
         <>
             <Title/>
         <div>
-           <h1> Your new application </h1>
+            <h1>Hello, {first_name}!</h1>
+           <h1> Do you want to make a new order?  </h1>
+           <form onSubmit={handleSubmit}>
            <div className="form-group">
-                <select id="service" className="form-control" value={type} onChange={(e) => setType(e.target.value)} required>
+                <select id="service" className="form-control" value={specialisation} onChange={(e) => setType(e.target.value)} required>
                     <option value="">Select Service</option>
                     {services.map(service => (
                         <option key={service} value={service}>{service}</option>
@@ -50,7 +77,7 @@ const Application = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="city">City</label>
-                <select id="city" className="form-control" value={selectedCity} onChange={(e) => setSelectedCity(e.target.value)}>
+                <select id="city" className="form-control" value={town} onChange={(e) => setSelectedCity(e.target.value)}>
                     <option value="">Select City</option>
                     {israeliCities.map(city => (
                         <option key={city} value={city}>{city}</option>
@@ -59,15 +86,16 @@ const Application = () => {
             </div>
             <div>
                 <label htmlFor="time">Estimated time (if you don't know-leave it empty)</label>
-                <input id="time" type="time" className="form-control" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)}/>
+                <input id="time" type="time" className="form-control" value={time} onChange={(e) => setSelectedTime(e.target.value)}/>
             </div>
             <div>
                 <div className="form-group">
                 <label htmlFor="rate">How much are you ready to pay? (if you don't know-leave it empty)</label>
-                <input id="rate" className="form-control" type="number" placeholder="Rate per hour" value={rate} onChange={(e) => setRate(parseInt(e.target.value))}/>
+                <input id="rate" className="form-control" type="number" placeholder="Rate per hour" value={rate_per_hour} onChange={(e) => setRate(parseInt(e.target.value))}/>
             </div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
         </div>
         <OrdersList/>
         </>

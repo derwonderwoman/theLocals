@@ -22,7 +22,7 @@ const Auth = ({ children }: AuthProps) => {
 
     const verify = async () => {
         try {
-            const response = await axios.get(`${process.env.BASE_URL}/clients/verify`, {
+            const response = await axios.get(`${process.env.BASE_URL}/${type}/verify`, {
                 headers: {
                     "x-access-token": token
                 },

@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 const Title = () => {
     return (
         <div>
-           <h1 id='title'>theLocals</h1>
+            <Link to="/">
+                <h1 id='title'>theLocals</h1>
+           </Link>
         </div>
     )
 }

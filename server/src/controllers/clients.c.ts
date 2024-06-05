@@ -2,12 +2,21 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { register, login } from "../models/clients.js";
-import { nanoid } from "nanoid";
+import { register, login, application} from "../models/clients.js";
 
 dotenv.config();
 
 const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
+
+interface ApplicationController {
+    client_id: string | number,
+    town:string,
+    specialisation:string,
+    date:Date,
+    time:string,
+    rate_per_hour:number,
+    status:string
+};
 
 interface DecodedToken {
     id: string;
@@ -15,7 +24,7 @@ interface DecodedToken {
 }
 
 interface ClientData {
-    id: number | string;
+    id?: string | number;
     email: string;
     password: string;
     gender: string;
@@ -27,7 +36,6 @@ interface ClientData {
 }
 
 interface ResponseClientData {
-    id: number | string;
     email: string;
     first_name: string;
     gender: string;
@@ -67,7 +75,7 @@ export const _login_client = async (req: Request, res: Response): Promise<void> 
             maxAge: 60 * 1000 
         });
 
-        res.json({ token: accessToken, type: "client" });
+        res.json({ token: accessToken, type: "client", first_name: client.first_name, id: client.id });
     } catch (error) {
         console.error("_login", error);
         res.status(500).json({ msg: "login failed" });
@@ -83,10 +91,7 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
         const salt: string = bcrypt.genSaltSync(10);
         const hashPassword: string = bcrypt.hashSync(password, salt);
 
-        const newID: string = nanoid();
-
         const newClientData: ClientData = {
-            id: newID,
             email: lowerEmail,
             password: hashPassword,
             first_name,
@@ -100,7 +105,6 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
         const newClient: ClientData = await register(newClientData);
 
         const newResponseClient: ResponseClientData = {
-            id: newID,
             email: lowerEmail,
             gender,
             first_name,
@@ -116,6 +120,34 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
         res.status(500).json({ msg: "registration failed" });
     }
 };
+
+
+export const _application = async (req: Request, res: Response): Promise<void> => {
+    const { town, specialisation, date, time, rate_per_hour, status, client_id}: ApplicationController = req.body;
+    
+    try {
+
+        const newApplication: ApplicationController = {
+            client_id,
+            town,
+            specialisation,
+            date,
+            time,
+            rate_per_hour,
+            status
+        };
+
+        const myApp: ApplicationController = await application(newApplication);
+        console.log(myApp);
+        
+
+        res.json({ success: true, message: "Application submitted successfully"});
+    } catch (error) {
+        console.error("_application", error);
+        res.status(500).json({ error: "Application failed" });
+    }
+};
+
 
 
 // import { register, login} from "../models/clients.js"

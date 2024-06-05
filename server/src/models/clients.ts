@@ -1,5 +1,15 @@
 import { db } from "../index";
 
+interface Application {
+    client_id: number | string;
+    town:string,
+    specialisation:string,
+    date:Date,
+    time:string,
+    rate_per_hour:number,
+    status:string
+}
+
 interface ClientData {
     first_name: string;
     last_name: string;
@@ -12,7 +22,7 @@ interface ClientData {
 }
 
 interface Client {
-    id: number;
+    id: string | number;
     first_name: string;
     last_name: string;
     town: string;
@@ -45,7 +55,6 @@ export const register = async ({
                 password,
                 gender
             }, [
-                "id",
                 "first_name",
                 "last_name",
                 "gender",
@@ -66,7 +75,7 @@ export const register = async ({
 export const login = async (email: string): Promise<Client> => {
     try {
         const client: Client = await db("clients")
-            .select("id", "email", "password")
+            .select("id", "email", "password", "first_name")
             .where({ email })
             .first();
 
@@ -76,3 +85,40 @@ export const login = async (email: string): Promise<Client> => {
         throw new Error("login error");
     }
 }
+
+export const application = async ({
+    client_id,
+    town,
+    specialisation,
+    date,
+    time,
+    rate_per_hour,
+    status
+}: Application): Promise<Application> => {
+    try {
+        const [application]: Application[] = await db("applications")
+            .insert({
+                client_id,
+                town,
+                specialisation,
+                date,
+                time,
+                rate_per_hour,
+                status
+            }, [
+                "client_id",
+                "specialisation",
+                "date",
+                "time",
+                "town",
+                "rate_per_hour",
+                "status"
+            ]);
+
+        return application;
+    } catch (error) {
+        console.error(error);
+        throw new Error('application error');
+    }
+}
+

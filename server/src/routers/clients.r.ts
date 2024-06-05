@@ -1,6 +1,7 @@
 import express from "express";
-import { _register_client, _login_client} from "../controllers/clients.c";
+import { _register_client, _login_client, _application} from "../controllers/clients.c";
 import { verifyToken } from "../middleware/verifyToken";
+
 
 const router = express.Router();
 
@@ -10,5 +11,6 @@ router.get("/verify",verifyToken, (req,res) => {
     res.sendStatus(200)
 }
 );
+router.post("/application", _application);
 
 export default router;

@@ -21,7 +21,9 @@ const LoginClient = () => {
 
             if (response.status === 200) {
                 setToken(response.data);
-                navigate("/");
+                localStorage.setItem("first_name",response.data.first_name);
+                localStorage.setItem("client_id", response.data.id)
+                navigate("/client/application");
             }
         } catch (error) {
             console.log(error);
