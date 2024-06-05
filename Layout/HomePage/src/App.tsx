@@ -20,7 +20,7 @@ export type TypeType = {
 };
 export type AuthContextType = TokenType & TypeType;
 
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+export const AuthContext = createContext<AuthContextType>({type: "client"} as AuthContextType);
 
 function App() {
   const [token, setToken] = useState<string>("");
