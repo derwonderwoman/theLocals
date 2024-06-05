@@ -31,7 +31,7 @@ const Application = () => {
                 time,
                 rate_per_hour,
                 status:'pending',
-                client_id  
+                client_id: client_id,
             }, { withCredentials: true });
 
             if (response.status === 200) {
