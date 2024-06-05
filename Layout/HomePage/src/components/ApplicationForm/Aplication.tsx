@@ -30,9 +30,9 @@ const Application = () => {
                 date,
                 time,
                 rate_per_hour,
+                specialist_id: "",
                 status:'pending',
                 client_id: client_id,
-                specialist_id: "0",
             }, { withCredentials: true });
 
             if (response.status === 200) {

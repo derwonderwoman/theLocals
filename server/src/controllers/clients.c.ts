@@ -126,6 +126,6 @@ export const _application = async (req: Request, res: Response): Promise<void> =
         res.json(newApplication);
     } catch (error) {
         console.error("_application", error);
-        res.status(500).json({ error: "Application failed" });
+        res.status(500).json({ error1: "Application failed: ", error });
     }
 };
