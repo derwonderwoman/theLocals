@@ -3,6 +3,7 @@ import { AuthContext } from "../App";
 import axios from "axios";
 import LoginClient from "../components/LoginClient/LoginClient"; 
 import LoginSpec from "../components/LoginSpec/LoginSpec";
+import { useNavigate } from "react-router-dom";
 
 interface AuthProps {
     children: ReactNode;
@@ -34,7 +35,11 @@ const Auth = ({ children }: AuthProps) => {
         }
     };
 
-    return redirect ? <>{children}</> : type === "client" ? <LoginClient/> : <LoginSpec/>;
+    const nav = useNavigate();
+
+    
+
+    return redirect ? <>{children}</> : type === "client" ? nav("/client/login") : nav("/specialist/login");
 };
 
 export default Auth;
