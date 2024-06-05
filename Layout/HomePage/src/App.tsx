@@ -6,7 +6,7 @@ import LoginSpec from './components/LoginSpec/LoginSpec';
 import RegistrationInput from './components/RegistrationPage/RegistrationInput';
 import Application from './components/ApplicationForm/Aplication';
 import {useState, createContext} from "react";
-import Auth from './Auth/Auth';
+// import Auth from './Auth/Auth';
 
 export type TokenType = {
   token: string;
