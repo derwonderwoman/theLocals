@@ -88,12 +88,12 @@ const Application = () => {
                 </select>
             </div>
             <div>
-                <label htmlFor="time">Estimated time (if you don't know-leave it empty)</label>
+                <label htmlFor="time">Estimated time (if you don't know-make it 00:00)</label>
                 <input id="time" type="time" className="form-control" value={time} onChange={(e) => setSelectedTime(e.target.value)}/>
             </div>
             <div>
                 <div className="form-group">
-                <label htmlFor="rate">How much are you ready to pay? (if you don't know-make it 00:00)</label>
+                <label htmlFor="rate">How much are you ready to pay? (if you don't know-leave it empty)</label>
                 <input id="rate" className="form-control" type="number" placeholder="Rate per hour" value={rate_per_hour} onChange={(e) => setRate(parseInt(e.target.value))}/>
             </div>
             </div>
