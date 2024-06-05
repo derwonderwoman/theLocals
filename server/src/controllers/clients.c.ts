@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { register, login, application} from "../models/clients.js";
+import { log } from "console";
 
 dotenv.config();
 
@@ -106,6 +107,8 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
 
 export const _application = async (req: Request, res: Response): Promise<void> => {
     const { town, specialisation, date, time, rate_per_hour, status, client_id, specialist_id}: ApplicationController = req.body;
+    console.log(town, specialisation, date, time, rate_per_hour, status, client_id, specialist_id);
+    
     
     try {
 
