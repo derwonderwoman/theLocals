@@ -37,8 +37,8 @@ const Application = () => {
             }, { withCredentials: true });
 
             if (response.status === 200) {
-                alert(`Your order #${response.data.id}  was succesfully created`);
-                navigate("/client/orderstatus"); 
+                // alert(`Your order #${response.data.id}  was succesfully created`);
+                // navigate("/client/orderstatus"); 
             }
         } catch (error) {
             console.error('Error submitting application: ', error);
