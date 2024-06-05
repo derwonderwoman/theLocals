@@ -122,9 +122,8 @@ export const _application = async (req: Request, res: Response): Promise<void> =
 
         const myApp: ApplicationController = await application(newApplication);
         console.log(myApp);
-        
 
-        res.json({ success: true, message: "Application submitted successfully"});
+        res.json(newApplication);
     } catch (error) {
         console.error("_application", error);
         res.status(500).json({ error: "Application failed" });
