@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { register, login } from "../models/specialists";
-import { nanoid } from "nanoid";
 dotenv.config();
 
 const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
@@ -14,7 +13,7 @@ interface DecodedToken {
 }
 
 interface SpecialistData {
-    id: string | number;
+    id?: string | number;
     email: string;
     password: string;
     first_name: string;
@@ -66,10 +65,8 @@ export const _register_spec = async (req: Request, res: Response): Promise<void>
 
         const salt: string = bcrypt.genSaltSync(10);
         const hashpassword: string = bcrypt.hashSync(password, salt);
-        const newID: string = nanoid();
 
         const newSpecData: SpecialistData = {
-            id: newID,
             email: loweremail,
             password: hashpassword,
             gender,
