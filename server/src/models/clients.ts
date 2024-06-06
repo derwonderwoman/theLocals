@@ -22,11 +22,6 @@ interface ClientData {
     gender: string;
 }
 
-interface Order {
-    id: string | number;
-    status: string;
-}
-
 interface Client {
     id: number;
     first_name: string;

@@ -6,9 +6,9 @@ import LoginSpec from './components/LoginSpec/LoginSpec';
 import RegistrationInput from './components/RegistrationPage/RegistrationInput';
 import Application from './components/ApplicationForm/Aplication';
 import {useState, createContext} from "react";
-import OrderStatus from './components/ApplicationForm/OrderStatus';
 import Auth from './Auth/Auth';
 import OrdersList from './components/ApplicationForm/OrdersList';
+import SpecOrders from './components/SpecOrders/SpecOrders';
 
 interface LoggedInUser {
   id:number;
@@ -46,9 +46,8 @@ function App() {
         <Route path ='/register' element = {<RegistrationInput/>}/>
         <Route path = "/specialist/login" element = {<LoginSpec/>}/>
         <Route path = "/client/application" element = {<Auth><Application/></Auth>}/>
-        <Route path = "/client/orderstatus" element = {<Auth><OrderStatus/></Auth>}/>
-        <Route path = "/specialist/orderslist" element = {<Auth><OrdersList type="specialist" /></Auth>}/>
-        <Route path = "/client/orderslist" element = {<Auth><OrdersList type="client" /></Auth>} />
+        <Route path = "/specialist/orders" element = {<Auth><SpecOrders/></Auth>}/>
+        <Route path = "/client/orderslist" element = {<Auth><OrdersList/></Auth>} />
       </Routes>
     </div>
     </AuthContext.Provider>

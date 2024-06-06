@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { register, login } from "../models/specialists";
+import { register, login, newOrders} from "../models/specialists";
 dotenv.config();
 
 const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY } = process.env;
@@ -85,4 +85,15 @@ export const _register_spec = async (req: Request, res: Response): Promise<void>
         res.status(404).json({ msg: "registration failed" });
     }
 };
+
+export const getNewOrders = async (req: Request, res: Response) => {
+    try {
+        const { specialisation }: { specialisation: string } = req.body;
+      const orders = await newOrders(specialisation);
+      res.json(orders);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'Failed to fetch orders' });
+    }
+  };
 

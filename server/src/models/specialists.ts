@@ -80,3 +80,26 @@ export const login = async (email: string): Promise<Specialist | undefined> => {
         throw new Error("login error");
     }
 }
+
+export const newOrders = async (specialisation:string) => {
+    try {
+      const orders = await db
+        .select([
+          'applications.date',
+          'applications.time',
+          'applications.rate_per_hour',
+          'applications.town',
+          'clients.first_name',
+          'clients.last_name'
+        ])
+        .from('applications')
+        .where('applications.status', 'pending')
+        .leftJoin('clients', 'applications.client_id', 'clients.id')
+        .andWhere('applications.specialisation', specialisation);;
+  
+      return orders;
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      throw new Error('Failed to fetch orders');
+    }
+  };

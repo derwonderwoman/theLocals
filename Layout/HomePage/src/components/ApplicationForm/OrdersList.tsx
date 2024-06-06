@@ -2,15 +2,16 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../config';
 import { AuthContext } from '../../App';
+import Title from '../HomePage/Title';
 
-const OrdersList = ({ type }: { type: string }) => {
+const OrdersList = () => {
     const [orders, setOrders] = useState<any[]>([]);
     const { loggedInUser } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/${type}/orderslist`, {
+                const response = await axios.get(`${BASE_URL}/client/orderslist`, {
                     withCredentials: true,
                     headers: {
                         "x-access-token": loggedInUser.token,
@@ -33,6 +34,7 @@ const OrdersList = ({ type }: { type: string }) => {
 
     return (
         <div>
+            <Title/>
             <hr />
             <h2>My previous orders</h2>
             <table className="table table-hover">
