@@ -6,9 +6,6 @@ const router = express.Router();
 
 router.post("/register", _register_spec);
 router.post("/login", _login_spec);
-router.get("/verify",verifyToken, (req,res) => {
-    res.sendStatus(200)
-}
-);
+// router.get("/orderslist",verifyToken);
 
 export default router;
