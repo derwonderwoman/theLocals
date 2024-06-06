@@ -21,7 +21,7 @@ const LoginClient = () => {
 
             if (response.status === 200) {
                 setLoggedInUser(response.data);
-                localStorage.setItem("loggedInUser", response.data)
+                localStorage.setItem("loggedInUser", JSON.stringify(response.data))
                 navigate("/client/application");
             }
         } catch (error) {
