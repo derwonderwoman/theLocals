@@ -11,7 +11,7 @@ import { AuthContext } from '../../App';
 const Application = () => {
     const {loggedInUser} = useContext(AuthContext);
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
-    const [town, setSelectedCity] = useState<string>(`${loggedInUser.town}`);
+    const [town, setSelectedCity] = useState<string>(loggedInUser.town);
     const [specialisation, setType] = useState<string>("")
     const [date, setDate] = useState<Date>(new Date());
     const [time, setSelectedTime] = useState<string>("");
@@ -88,7 +88,7 @@ const Application = () => {
             <div className="form-group">
                 <label htmlFor="city">City</label>
                 <select id="city" className="form-control" value={town} onChange={(e) => setSelectedCity(e.target.value)}>
-                    <option value="">Select City</option>
+                    <option value="">{town}</option>
                     {israeliCities.map(city => (
                         <option key={city} value={city}>{city}</option>
                     ))}
