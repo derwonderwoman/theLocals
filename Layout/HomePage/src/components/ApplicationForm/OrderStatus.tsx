@@ -2,9 +2,8 @@ import OrdersList from "./OrdersList";
 
 const OrderStatus= () => {
     return (
-        <div>
-            
-            <OrdersList/>
+        <div>          
+            <OrdersList type="client"/>
         </div>
     )
 }

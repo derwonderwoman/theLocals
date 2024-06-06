@@ -1,10 +1,11 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, useContext} from 'react';
 import Title from '../HomePage/Title';
 import axios from 'axios';
 import OrdersList from './OrdersList';
 import { ISRAEL_CITIES } from '../../config';
 import { BASE_URL } from '../../config';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../App';
 
 
 
@@ -15,18 +16,20 @@ const Application = () => {
     const [date, setDate] = useState<Date>(new Date());
     const [time, setSelectedTime] = useState<string>("");
     const [rate_per_hour, setRate] = useState<number>();
+    const {loggedInUser} = useContext(AuthContext);
+
     // const [status, setStatus] = useState<string>("pending");
 
 
     const services = ["Cleaning", "Babysitting", "Preparing food"];
     const first_name = localStorage.getItem("first_name");
     const client_id = localStorage.getItem("client_id");
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${BASE_URL}/client/application`, {
+            const response = await axios.post(`${BASE_URL}/client/application`,{
                 town,
                 specialisation,
                 date,
@@ -34,11 +37,17 @@ const Application = () => {
                 rate_per_hour,
                 status:'pending',
                 client_id: client_id,
-            }, { withCredentials: true });
+            }, { withCredentials: true, 
+                headers:{
+                    "x-access-token":loggedInUser.token,
+                } });
 
             if (response.status === 200) {
-                alert(`Your order #${response.data.id}  was succesfully created`);
+                alert(`Your order #${response.data.id} was succesfully created`);
                 // navigate("/client/orderstatus"); 
+            } else {
+                alert("Token is invalid, please log in again");
+                navigate("/")
             }
         } catch (error) {
             console.error('Error submitting application: ', error);
@@ -100,7 +109,7 @@ const Application = () => {
             <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </div>
-        <OrdersList/>
+        <OrdersList type="client"/>
         </>
         
     )

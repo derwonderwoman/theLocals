@@ -1,4 +1,4 @@
-const OrdersList = () => {
+const OrdersList = ({type}: { type: string }) => {
     return (
         <div>
             <hr></hr>

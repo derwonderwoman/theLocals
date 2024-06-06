@@ -1,15 +1,11 @@
 import axios from 'axios';
-import { useState, useEffect, FormEvent, useContext } from 'react';
+import { useState, useEffect, FormEvent} from 'react';
 import Title from '../HomePage/Title';
 import { useNavigate } from "react-router-dom";
 import { BASE_URL, ISRAEL_CITIES } from '../../config';
-import { AuthContext } from '../../App';
 
 
 const RegistrationInput = () => { 
-
-    const {type, setType} = useContext(AuthContext);
-    
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
     const [town, setSelectedCity] = useState<string>("");
     const [first_name, setFirstName] = useState<string>("");
@@ -20,6 +16,7 @@ const RegistrationInput = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [specialisation, setServices] = useState<string[]>([]);
+    const [type, setType] = useState<string>("client")
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {

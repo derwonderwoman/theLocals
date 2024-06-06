@@ -8,7 +8,7 @@ import { BASE_URL } from '../../config';
 const LoginClient = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const { setToken } = useContext(AuthContext);
+    const {setLoggedInUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
@@ -20,14 +20,12 @@ const LoginClient = () => {
             }, { withCredentials: true });
 
             if (response.status === 200) {
-                setToken(response.data);
-                localStorage.setItem("first_name",response.data.first_name);
-                localStorage.setItem("client_id", response.data.id)
+                setLoggedInUser(response.data);
+                localStorage.setItem("loggedInUser", response.data)
                 navigate("/client/application");
             }
         } catch (error) {
             console.log(error);
-            setToken("");
         }
     };
 

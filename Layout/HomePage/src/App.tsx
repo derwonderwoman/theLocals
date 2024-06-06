@@ -8,26 +8,36 @@ import Application from './components/ApplicationForm/Aplication';
 import {useState, createContext} from "react";
 import OrderStatus from './components/ApplicationForm/OrderStatus';
 import Auth from './Auth/Auth';
+import OrdersList from './components/ApplicationForm/OrdersList';
 
-export type TokenType = {
+interface LoggedInUser {
+  id:number;
+  email:string;
+  first_name:string;
+  last_name:string;
+  phone_number:string;
+  type:"client" | "specialist";
   token: string;
-  setToken: (token: string) => void;
+}
+
+export type ApplicationContext = {
+  loggedInUser: LoggedInUser;
+  setLoggedInUser: (u:LoggedInUser) => void;
 };
 
-export type TypeType = {
-  type: string;
-  setType: (type: string) => void;
-};
-export type AuthContextType = TokenType & TypeType;
+const ctx = {} as ApplicationContext 
 
-export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+if (localStorage.getItem("loggedInUser")) {
+  ctx.loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") as string)
+}
+
+export const AuthContext = createContext<ApplicationContext>(ctx);
 
 function App() {
-  const [token, setToken] = useState<string>("");
-  const [type, setType] = useState<string>("client");
+  const[loggedInUser, setLoggedInUser] = useState(ctx.loggedInUser)
 
   return (
-    <AuthContext.Provider value={{ token, setToken, type, setType }}>
+    <AuthContext.Provider value={{ loggedInUser, setLoggedInUser }}>
     <div>
       <Routes>
         <Route path = "/" element = {<Home/>}/>
@@ -36,6 +46,8 @@ function App() {
         <Route path = "/specialist/login" element = {<LoginSpec/>}/>
         <Route path = "/client/application" element = {<Auth><Application/></Auth>}/>
         <Route path = "/client/orderstatus" element = {<OrderStatus/>}/>
+        <Route path = {`/specialist/orderslist`} element = {<OrdersList type="specialist" />} />
+        <Route path = {`/client/orderslist`} element = {<OrdersList type="client" />} />
       </Routes>
     </div>
     </AuthContext.Provider>

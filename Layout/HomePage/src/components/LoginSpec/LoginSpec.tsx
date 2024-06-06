@@ -9,7 +9,7 @@ import { BASE_URL } from '../../config';
 const LoginSpec = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const { setToken } = useContext(AuthContext);
+    const {setLoggedInUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
@@ -21,12 +21,11 @@ const LoginSpec = () => {
             }, { withCredentials: true });
 
             if (response.status === 200) {
-                setToken(response.data);
+                setLoggedInUser(response.data);
                 navigate("/");
             }
         } catch (error) {
             console.log(error);
-            setToken("");
         }
     };
 
