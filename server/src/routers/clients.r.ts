@@ -7,11 +7,7 @@ const router = express.Router();
 
 router.post("/register", _register_client);
 router.post("/login", _login_client);
-router.get("/verify",verifyToken, (req,res) => {
-    res.sendStatus(200)
-}
-);
-router.post("/application", _application);
+router.post("/application",verifyToken, _application);
 // router.get("/orderstatus",  )
 
 export default router;

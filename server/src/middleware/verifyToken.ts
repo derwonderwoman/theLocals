@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request as ExpressRequest, Response, NextFunction } from "express";
 import dotenv from "dotenv";
-import { DecodedToken } from "../controllers/clients.c";
 
 dotenv.config();
 
