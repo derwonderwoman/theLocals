@@ -22,7 +22,7 @@ const LoginSpec = () => {
 
             if (response.status === 200) {
                 setLoggedInUser(response.data);
-                navigate("/");
+                navigate("/specialist/orders");
             }
         } catch (error) {
             console.log(error);
