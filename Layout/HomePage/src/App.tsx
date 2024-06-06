@@ -16,6 +16,7 @@ interface LoggedInUser {
   first_name:string;
   last_name:string;
   phone_number:string;
+  town:string;
   type:"client" | "specialist";
   token: string;
 }

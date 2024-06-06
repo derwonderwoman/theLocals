@@ -9,13 +9,14 @@ import { AuthContext } from '../../App';
 
 
 const Application = () => {
+    const {loggedInUser} = useContext(AuthContext);
     const [israeliCities, setIsraeliCities] = useState<string[]>([]);
-    const [town, setSelectedCity] = useState<string>("");
+    const [town, setSelectedCity] = useState<string>(`${loggedInUser.town}`);
     const [specialisation, setType] = useState<string>("")
     const [date, setDate] = useState<Date>(new Date());
     const [time, setSelectedTime] = useState<string>("");
     const [rate_per_hour, setRate] = useState<number>();
-    const {loggedInUser} = useContext(AuthContext);
+    
 
 
     const services = ["Cleaning", "Babysitting", "Preparing food"];
