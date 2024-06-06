@@ -68,7 +68,7 @@ export const _login_client = async (req: Request, res: Response): Promise<void> 
             maxAge: 60 * 1000 
         });
 
-        res.json({ token: accessToken, type: "client", first_name: client.first_name, id: client.id, email:client.email,town:client.town, last_name: client.last_name });
+        res.json({ token: accessToken, type: "client", first_name: client.first_name, id: client.id, email:client.email, town:client.town, last_name: client.last_name });
     } catch (error) {
         console.error("_login", error);
         res.status(500).json({ msg: "login failed" });
