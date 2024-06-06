@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from '../../config';
+import { Link } from 'react-router-dom';
 
 const LoginClient = () => {
     const [email, setEmail] = useState<string>("");
@@ -47,7 +48,7 @@ const LoginClient = () => {
                 </form>
                 <hr />
                 <h2> Please login first and we will find you your best match!</h2>
-                <h3>If you are not registered yet, please sign in <a href='/register'>here</a></h3>
+                <h3>If you are not registered yet, please sign in <Link to="/register"> here</Link></h3> 
             </div>
         </>
     );

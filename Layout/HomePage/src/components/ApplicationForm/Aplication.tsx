@@ -5,6 +5,7 @@ import { ISRAEL_CITIES } from '../../config';
 import { BASE_URL } from '../../config';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../App';
+import { Link } from 'react-router-dom';
 
 
 
@@ -101,7 +102,7 @@ const Application = () => {
             </div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
-            <h3> If you want to see your previous orders press <a href='/client/orderslist'>here</a></h3>
+            <h3>If you want to see your previous orders press <Link to="/client/orderslist"> here</Link></h3> 
             </form>
         </div>
         </>
