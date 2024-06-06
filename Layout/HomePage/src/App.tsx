@@ -45,9 +45,9 @@ function App() {
         <Route path ='/register' element = {<RegistrationInput/>}/>
         <Route path = "/specialist/login" element = {<LoginSpec/>}/>
         <Route path = "/client/application" element = {<Auth><Application/></Auth>}/>
-        <Route path = "/client/orderstatus" element = {<OrderStatus/>}/>
-        <Route path = {`/specialist/orderslist`} element = {<OrdersList type="specialist" />} />
-        <Route path = {`/client/orderslist`} element = {<OrdersList type="client" />} />
+        <Route path = "/client/orderstatus" element = {<Auth><OrderStatus/></Auth>}/>
+        <Route path = "/specialist/orderslist" element = {<Auth><OrdersList type="specialist" /></Auth>}/>
+        <Route path = "/client/orderslist" element = {<Auth><OrdersList type="client" /></Auth>} />
       </Routes>
     </div>
     </AuthContext.Provider>

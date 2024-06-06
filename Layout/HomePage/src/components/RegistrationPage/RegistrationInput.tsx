@@ -36,6 +36,9 @@ const RegistrationInput = () => {
 
             if (response.status === 200) {
                 alert("Registration successful!");
+                if(type){
+                    navigate(`/${type}/login`)
+                }
                 setFirstName("");
                 setLastName("");
                 setYear(undefined);
@@ -46,8 +49,6 @@ const RegistrationInput = () => {
                 setPassword("");
                 setType("client");
                 setServices([]);
-
-                navigate("/");
             }
         } catch (error) {
             console.log(error);

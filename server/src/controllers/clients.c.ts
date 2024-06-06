@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { register, login, application} from "../models/clients.js";
+import { register, login, application, orderslist} from "../models/clients.js";
+import { stat } from "fs/promises";
 
 dotenv.config();
 
@@ -104,8 +105,8 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
 };
 
 
-export const _application = async (req: Request, res: Response): Promise<void> => {
-    const { town, specialisation, date, time, rate_per_hour, status, client_id}: ApplicationController = req.body;
+export const _createApplication = async (req: Request, res: Response): Promise<void> => {
+    const { town, specialisation, date, time, rate_per_hour, status = "pending" , client_id}: ApplicationController = req.body;
   
     try {
 
@@ -116,7 +117,7 @@ export const _application = async (req: Request, res: Response): Promise<void> =
             date,
             time,
             rate_per_hour,
-            status
+            status,
         };
 
         const myApp: ApplicationController = await application(newApplication);
@@ -126,3 +127,13 @@ export const _application = async (req: Request, res: Response): Promise<void> =
         res.status(500).json({ error1: "Application failed: ", error });
     }
 };
+
+export const getOrders = async (req: Request, res: Response) => {
+    try {
+      const orders = await orderslist();
+      res.json(orders);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'Failed to fetch orders' });
+    }
+  };

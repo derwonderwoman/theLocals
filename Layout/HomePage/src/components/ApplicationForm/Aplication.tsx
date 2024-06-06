@@ -1,7 +1,6 @@
 import { useState, useEffect, FormEvent, useContext} from 'react';
 import Title from '../HomePage/Title';
 import axios from 'axios';
-import OrdersList from './OrdersList';
 import { ISRAEL_CITIES } from '../../config';
 import { BASE_URL } from '../../config';
 import { useNavigate } from "react-router-dom";
@@ -17,8 +16,6 @@ const Application = () => {
     const [time, setSelectedTime] = useState<string>("");
     const [rate_per_hour, setRate] = useState<number>();
     const {loggedInUser} = useContext(AuthContext);
-
-    // const [status, setStatus] = useState<string>("pending");
 
 
     const services = ["Cleaning", "Babysitting", "Preparing food"];
@@ -44,7 +41,7 @@ const Application = () => {
 
             if (response.status === 200) {
                 alert(`Your order #${response.data.id} was succesfully created`);
-                // navigate("/client/orderstatus"); 
+                navigate("/client/orderstatus"); 
             } else {
                 alert("Token is invalid, please log in again");
                 navigate("/")
@@ -108,8 +105,8 @@ const Application = () => {
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+            <h3> If you want to see your previous orders press <a href='/client/orderslist'>here</a></h3>
         </div>
-        <OrdersList type="client"/>
         </>
         
     )

@@ -128,12 +128,22 @@ export const application = async ({
     }
 }
 
-// export const orderStatus = async ({}): Promise<Client> => {
-//     try {
-        
-//     } catch (error) {
-//         console.error(error);
-//         throw new Error("orderStatus error");
-//     }
-// }
-
+export const orderslist = async () => {
+    try {
+      const orders = await db
+        .select([
+          'applications.date',
+          'applications.specialisation',
+          'applications.status',
+          'specialists.first_name',
+          'specialists.last_name'
+        ])
+        .from('applications')
+        .leftJoin('specialists', 'applications.specialist_id', 'specialists.id');
+  
+      return orders;
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      throw new Error('Failed to fetch orders');
+    }
+  };
