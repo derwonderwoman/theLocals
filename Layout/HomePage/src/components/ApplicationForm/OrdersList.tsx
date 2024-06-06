@@ -5,16 +5,17 @@ import { AuthContext } from '../../App';
 
 const OrdersList = ({ type }: { type: string }) => {
     const [orders, setOrders] = useState<any[]>([]);
-    const {loggedInUser} = useContext(AuthContext);
+    const { loggedInUser } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/client/orderslist`,
-                { withCredentials: true, 
-                    headers:{
-                        "x-access-token":loggedInUser.token,
-                    } });
+                const response = await axios.get(`${BASE_URL}/${type}/orderslist`, {
+                    withCredentials: true,
+                    headers: {
+                        "x-access-token": loggedInUser.token,
+                    }
+                });
                 setOrders(response.data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -26,14 +27,32 @@ const OrdersList = ({ type }: { type: string }) => {
 
     return (
         <div>
-            <hr></hr>
-            <h2>My previous orders ({type})</h2>
-            <ul>
-                {orders.map((order, index) => (
-                    <li key={index}>{order.date} - {order.specialisation} - {order.status} - {order.first_name} {order.last_name}</li>
-                ))}
-            </ul>
-            <hr></hr>
+            <hr />
+            <h2>My previous orders</h2>
+            <table className="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Specialisation</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {orders.map((order, index) => (
+                        <tr key={index}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{order.date}</td>
+                            <td>{order.specialisation}</td>
+                            <td>{order.status}</td>
+                            <td>{order.first_name}</td>
+                            <td>{order.last_name}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
