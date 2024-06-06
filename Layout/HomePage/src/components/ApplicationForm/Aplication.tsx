@@ -17,11 +17,7 @@ const Application = () => {
     const [time, setSelectedTime] = useState<string>("");
     const [rate_per_hour, setRate] = useState<number>();
     
-
-
     const services = ["Cleaning", "Babysitting", "Preparing food"];
-    const first_name = localStorage.getItem("first_name");
-    const client_id = localStorage.getItem("client_id");
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
@@ -34,7 +30,7 @@ const Application = () => {
                 time,
                 rate_per_hour,
                 status:'pending',
-                client_id: client_id,
+                client_id: loggedInUser.id,
             }, { withCredentials: true, 
                 headers:{
                     "x-access-token":loggedInUser.token,
@@ -70,7 +66,7 @@ const Application = () => {
         <>
             <Title/>
         <div>
-            <h1>Hello, {first_name}!</h1>
+            <h1>Hello, {loggedInUser.first_name}!</h1>
            <h1> Do you want to make a new order?  </h1>
            <form onSubmit={handleSubmit}>
            <div className="form-group">
@@ -88,8 +84,8 @@ const Application = () => {
             <div className="form-group">
                 <label htmlFor="town">City</label>
                 <select id="town" className="form-control" value={town} onChange={(e) => setSelectedCity(e.target.value)}>
-                    <option value="">{town}</option>
-                    {israeliCities.map(town => (
+                    <option key={town} value={town}>{town}</option>
+                    {israeliCities.filter(v => v !== town).map(town => (
                         <option key={town} value={town}>{town}</option>
                     ))}
                 </select>
