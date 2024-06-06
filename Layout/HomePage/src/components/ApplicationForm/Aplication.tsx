@@ -101,8 +101,8 @@ const Application = () => {
             </div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
             <h3> If you want to see your previous orders press <a href='/client/orderslist'>here</a></h3>
+            </form>
         </div>
         </>
         
