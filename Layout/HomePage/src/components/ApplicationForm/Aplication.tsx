@@ -86,11 +86,11 @@ const Application = () => {
                 <input id="date" className="form-control" type="date" value={date.toISOString().substr(0, 10)} onChange={(e) => setDate(new Date(e.target.value))} required />
             </div>
             <div className="form-group">
-                <label htmlFor="city">City</label>
-                <select id="city" className="form-control" value={town} onChange={(e) => setSelectedCity(e.target.value)}>
+                <label htmlFor="town">City</label>
+                <select id="town" className="form-control" value={town} onChange={(e) => setSelectedCity(e.target.value)}>
                     <option value="">{town}</option>
-                    {israeliCities.map(city => (
-                        <option key={city} value={city}>{city}</option>
+                    {israeliCities.map(town => (
+                        <option key={town} value={town}>{town}</option>
                     ))}
                 </select>
             </div>
