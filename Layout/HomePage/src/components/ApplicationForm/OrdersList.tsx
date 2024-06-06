@@ -25,6 +25,12 @@ const OrdersList = ({ type }: { type: string }) => {
         fetchOrders();
     }, []);
 
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        return formattedDate;
+    };
+
     return (
         <div>
             <hr />
@@ -34,17 +40,17 @@ const OrdersList = ({ type }: { type: string }) => {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Specialisation</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
+                        <th scope="col">Requested Service</th>
+                        <th scope="col">Status of order</th>
+                        <th scope="col">Specialist First Name</th>
+                        <th scope="col">Specialist Last Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     {orders.map((order, index) => (
                         <tr key={index}>
                             <th scope="row">{index + 1}</th>
-                            <td>{order.date}</td>
+                            <td>{formatDate(order.date)}</td>
                             <td>{order.specialisation}</td>
                             <td>{order.status}</td>
                             <td>{order.first_name}</td>
