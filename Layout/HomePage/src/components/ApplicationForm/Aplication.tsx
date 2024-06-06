@@ -41,7 +41,7 @@ const Application = () => {
 
             if (response.status === 200) {
                 alert(`Your order #${response.data.id} was succesfully created`);
-                navigate("/client/orderstatus"); 
+                navigate("/client/orderslist"); 
             } else {
                 alert("Token is invalid, please log in again");
                 navigate("/")
