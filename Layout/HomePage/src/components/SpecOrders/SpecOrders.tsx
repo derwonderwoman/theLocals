@@ -40,7 +40,7 @@ const SpecOrders = () => {
 
     const handleApply = async (orderId: number) => {
         try {
-            await axios.put(`${BASE_URL}/client/applications/${orderId}`, {
+            await axios.put(`${BASE_URL}/specialist/applications/${orderId}`, {
                 status: 'waiting for approving'
             }, {
                 withCredentials: true,
