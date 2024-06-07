@@ -106,11 +106,12 @@ export const _register_client = async (req: Request, res: Response): Promise<voi
 
 
 export const _createApplication = async (req: Request, res: Response): Promise<void> => {
-    const { town, specialisation, date, time, rate_per_hour, status = "pending" , client_id}: ApplicationController = req.body;
+    const {id, town, specialisation, date, time, rate_per_hour, status = "pending" , client_id}: ApplicationController = req.body;
   
     try {
 
         const newApplication: ApplicationController = {
+            id,
             client_id,
             town,
             specialisation,

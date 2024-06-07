@@ -51,35 +51,6 @@ const SpecOrders = () => {
         }
     };
 
-    // useEffect(() => {
-    //     const fetchOrders = async () => {
-    //         try {
-    //             const response = await axios.get(`${BASE_URL}/specialist/orders`, {
-    //                 withCredentials: true,
-    //                 params: {
-    //                     id: loggedInUser.id
-    //                 },
-    //                 headers: {
-    //                     "x-access-token": loggedInUser.token,
-    //                 }
-    //             });
-    //             setOrders(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching orders:', error);
-    //         }
-    //     };
-
-    //     fetchOrders();
-    // }, []);
-
-    // const formatDate = (dateString: string) => {
-    //     const date = new Date(dateString);
-    //     const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-    //     return formattedDate;
-    // };
-
-    
-
     return (
         <div>
             <Title/>

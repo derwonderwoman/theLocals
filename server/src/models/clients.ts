@@ -130,6 +130,7 @@ export const orderslist = async () => {
           'applications.date',
           'applications.specialisation',
           'applications.status',
+          'applications.id',
           'specialists.first_name',
           'specialists.last_name'
         ])
