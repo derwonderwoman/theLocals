@@ -22,6 +22,7 @@ const LoginSpec = () => {
 
             if (response.status === 200) {
                 setLoggedInUser(response.data);
+                localStorage.setItem("loggedInUser", JSON.stringify(response.data));
                 navigate("/specialist/orders");
             }
         } catch (error) {

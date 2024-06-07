@@ -97,7 +97,6 @@ export const newOrders = async (specialistId: number): Promise<Order[]> => {
             .join('clients', 'applications.client_id', '=', 'clients.id')
             .where('applications.status', '=', 'pending')
             .andWhere('applications.specialisation', '=', db('specialists').select('specialisation').where('id', '=', specialistId).first());
-
         return orders;
     } catch (error) {
         console.error('Error fetching pending orders:', error);
