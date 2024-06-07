@@ -96,7 +96,7 @@ export const newOrders = async (specialistId: number): Promise<Order[]> => {
             .select('applications.date', 'applications.time', 'applications.rate_per_hour', 'applications.town', 'clients.first_name', 'clients.last_name')
             .join('clients', 'applications.client_id', '=', 'clients.id')
             .where('applications.status', '=', 'pending')
-            .andWhere('applications.specialisation', '=', db('specialists').select('specialisation').where('id', '=', specialistId));
+            .andWhere('applications.specialisation', '=', db('specialists').select('specialisation').where('id', '=', specialistId).first());
 
         return orders;
     } catch (error) {
