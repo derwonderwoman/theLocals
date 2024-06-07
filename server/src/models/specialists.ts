@@ -1,5 +1,14 @@
 import { db } from "../index";
 
+interface Order {
+    date: Date;
+    time: string;
+    rate_per_hour: number;
+    town: string;
+    first_name: string;
+    last_name: string;
+}
+
 interface SpecialistData {
     first_name: string;
     last_name: string;
@@ -81,25 +90,17 @@ export const login = async (email: string): Promise<Specialist | undefined> => {
     }
 }
 
-export const newOrders = async (specialisation:string) => {
+export const newOrders = async (specialistId: number): Promise<Order[]> => {
     try {
-      const orders = await db
-        .select([
-          'applications.date',
-          'applications.time',
-          'applications.rate_per_hour',
-          'applications.town',
-          'clients.first_name',
-          'clients.last_name'
-        ])
-        .from('applications')
-        .where('applications.status', 'pending')
-        .leftJoin('clients', 'applications.client_id', 'clients.id')
-        .andWhere('applications.specialisation', specialisation);;
-  
-      return orders;
+        const orders: Order[] = await db('applications')
+            .select('applications.date', 'applications.time', 'applications.rate_per_hour', 'applications.town', 'clients.first_name', 'clients.last_name')
+            .join('clients', 'applications.client_id', '=', 'clients.id')
+            .where('applications.status', '=', 'pending')
+            .andWhere('applications.specialisation', '=', db('specialists').select('specialisation').where('id', '=', specialistId));
+
+        return orders;
     } catch (error) {
-      console.error('Error fetching orders:', error);
-      throw new Error('Failed to fetch orders');
+        console.error('Error fetching pending orders:', error);
+        throw new Error('Failed to fetch pending orders');
     }
-  };
+};

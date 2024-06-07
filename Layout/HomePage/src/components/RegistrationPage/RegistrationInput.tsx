@@ -15,7 +15,7 @@ const RegistrationInput = () => {
     const [phone_number, setPhone] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [specialisation, setServices] = useState<string[]>([]);
+    const [specialisation, setSpecialisation] = useState<string>("");
     const [type, setType] = useState<string>("client")
     const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const RegistrationInput = () => {
                 setEmail("");
                 setPassword("");
                 setType("client");
-                setServices([]);
+                setSpecialisation("");
             }
         } catch (error) {
             console.log(error);
@@ -70,14 +70,6 @@ const RegistrationInput = () => {
         fetchCities();
     }, []);
 
-    const handleServiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        if (specialisation.includes(value)) {
-            setServices(specialisation.filter(service => service !== value));
-        } else {
-            setServices([...specialisation, value]);
-        }
-    };
 
     return (
         <>
@@ -135,11 +127,11 @@ const RegistrationInput = () => {
                 {type === "specialist" && (
                     <div className="form-group">
                     <label>Services Offered</label><br />
-                    <input type="checkbox" id="cleaning" value="cleaning" checked={specialisation.includes("cleaning")} onChange={handleServiceChange} />
+                    <input type="radio" id="cleaning" value="cleaning" checked={specialisation === "cleaning"} onChange={() => setSpecialisation("cleaning")} />
                     <label htmlFor="cleaning">Cleaning</label>
-                    <input type="checkbox" id="babysitting" value="babysitting" checked={specialisation.includes("babysitting")} onChange={handleServiceChange} />
+                    <input type="radio" id="babysitting" value="babysitting" checked={specialisation === "babysitting"} onChange={() => setSpecialisation("babysitting")} />
                     <label htmlFor="babysitting">Babysitting</label>
-                    <input type="checkbox" id="cooking" value="cooking" checked={specialisation.includes("cooking")} onChange={handleServiceChange} />
+                    <input type="radio" id="cooking" value="cooking" checked={specialisation === "cooking"} onChange={() => setSpecialisation("cooking")} />
                     <label htmlFor="cooking">Preparing Food</label>
                 </div>
                 )}

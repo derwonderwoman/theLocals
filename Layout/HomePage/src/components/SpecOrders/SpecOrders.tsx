@@ -13,6 +13,9 @@ const SpecOrders = () => {
             try {
                 const response = await axios.get(`${BASE_URL}/specialist/orders`, {
                     withCredentials: true,
+                    params: {
+                        id: loggedInUser.id
+                    },
                     headers: {
                         "x-access-token": loggedInUser.token,
                     }
