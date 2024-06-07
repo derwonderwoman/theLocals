@@ -52,7 +52,7 @@ export const _login_spec = async (req: Request, res: Response): Promise<void> =>
             maxAge: 60 * 1000
         });
 
-        res.json({ token: accessToken, type:"specialist" });
+        res.json({ token: accessToken, type:"specialist", id: specialist.id, first_name: specialist.first_name, last_name: specialist.last_name, specialisation: specialist.specialisation });
     } catch (error) {
         console.error("_login", error);
         res.status(404).json({ msg: "login failed" });
