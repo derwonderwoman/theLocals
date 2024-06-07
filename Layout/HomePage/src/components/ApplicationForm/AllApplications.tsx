@@ -36,7 +36,7 @@ const AllAplications = () => {
         <div>
             <Title/>
             <hr />
-            <h2>My previous orders</h2>
+            <h2>All orders</h2>
             <table className="table table-hover">
                 <thead>
                     <tr>

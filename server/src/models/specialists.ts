@@ -128,3 +128,27 @@ export const getAllApplications = async () => {
         throw new Error('Failed to fetch applications');
     }
 };
+
+export const getApplication = async (orderId:number) => {
+    try {
+        const applications = await db('applications')
+            .select([
+                'applications.date',
+                'applications.specialisation',
+                'applications.status',
+                'applications.id',
+                'specialists.first_name AS specialist_first_name',
+                'specialists.last_name AS specialist_last_name',
+                'clients.first_name AS client_first_name',
+                'clients.last_name AS client_last_name'
+            ])
+            .join('clients', 'applications.client_id', 'clients.id')
+            .join('specialists', 'applications.specialist_id', 'specialists.id')
+            .where('applications.id', orderId);
+
+        return applications;
+    } catch (error) {
+        console.error('Error fetching applications:', error);
+        throw new Error('Failed to fetch applications');
+    }
+};

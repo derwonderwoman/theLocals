@@ -98,7 +98,6 @@ const SpecOrders = () => {
                     ))}
                 </tbody>
             </table>
-            <h3>All orders</h3>
             <AllAplications/>
         </div>
     );
