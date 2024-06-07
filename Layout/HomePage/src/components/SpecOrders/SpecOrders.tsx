@@ -9,31 +9,76 @@ const SpecOrders = () => {
     const { loggedInUser } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/specialist/orders`, {
-                    withCredentials: true,
-                    params: {
-                        id: loggedInUser.id
-                    },
-                    headers: {
-                        "x-access-token": loggedInUser.token,
-                    }
-                });
-                setOrders(response.data);
-            } catch (error) {
-                console.error('Error fetching orders:', error);
-            }
-        };
-
         fetchOrders();
     }, []);
 
-    const formatDate = (dateString: string) => {
+    const fetchOrders = async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}/specialist/orders`, {
+                withCredentials: true,
+                params: {
+                    id: loggedInUser.id
+                },
+                headers: {
+                    "x-access-token": loggedInUser.token,
+                }
+            });
+            setOrders(response.data);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    };
+
+    const formatDate = (dateString:string) => {
         const date = new Date(dateString);
         const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
         return formattedDate;
     };
+
+    const handleApply = async (orderId: number) => {
+        try {
+            await axios.put(`${BASE_URL}/applications/${orderId}`, {
+                status: 'waiting for approving'
+            }, {
+                withCredentials: true,
+                headers: {
+                    "x-access-token": loggedInUser.token,
+                }
+            });
+            fetchOrders();
+        } catch (error) {
+            console.error('Error applying:', error);
+        }
+    };
+
+    // useEffect(() => {
+    //     const fetchOrders = async () => {
+    //         try {
+    //             const response = await axios.get(`${BASE_URL}/specialist/orders`, {
+    //                 withCredentials: true,
+    //                 params: {
+    //                     id: loggedInUser.id
+    //                 },
+    //                 headers: {
+    //                     "x-access-token": loggedInUser.token,
+    //                 }
+    //             });
+    //             setOrders(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching orders:', error);
+    //         }
+    //     };
+
+    //     fetchOrders();
+    // }, []);
+
+    // const formatDate = (dateString: string) => {
+    //     const date = new Date(dateString);
+    //     const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    //     return formattedDate;
+    // };
+
+    
 
     return (
         <div>
@@ -63,6 +108,9 @@ const SpecOrders = () => {
                             <td>{order.rate_per_hour}</td>
                             <td>{order.first_name}</td>
                             <td>{order.last_name}</td>
+                            <td>
+                                <button onClick={() => handleApply(order.id)}>Apply</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
