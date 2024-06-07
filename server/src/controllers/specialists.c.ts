@@ -85,7 +85,7 @@ export const _register_spec = async (req: Request, res: Response): Promise<void>
 
 export const getNewOrders = async (req: Request, res: Response) => {
     try {
-        const specID = req.query.specialistId;
+        const specID = req.query.id;
         const orders = await newOrders(parseInt(specID as string));
         res.json(orders);
     } catch (error) {
