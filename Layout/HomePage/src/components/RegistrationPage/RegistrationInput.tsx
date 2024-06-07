@@ -127,11 +127,11 @@ const RegistrationInput = () => {
                 {type === "specialist" && (
                     <div className="form-group">
                     <label>Services Offered</label><br />
-                    <input type="radio" id="cleaning" value="cleaning" checked={specialisation === "cleaning"} onChange={() => setSpecialisation("cleaning")} />
+                    <input type="radio" id="cleaning" value="cleaning" checked={specialisation === "Cleaning"} onChange={() => setSpecialisation("Cleaning")} />
                     <label htmlFor="cleaning">Cleaning</label>
-                    <input type="radio" id="babysitting" value="babysitting" checked={specialisation === "babysitting"} onChange={() => setSpecialisation("babysitting")} />
+                    <input type="radio" id="babysitting" value="babysitting" checked={specialisation === "Babysitting"} onChange={() => setSpecialisation("Babysitting")} />
                     <label htmlFor="babysitting">Babysitting</label>
-                    <input type="radio" id="cooking" value="cooking" checked={specialisation === "cooking"} onChange={() => setSpecialisation("cooking")} />
+                    <input type="radio" id="cooking" value="cooking" checked={specialisation === "Cooking"} onChange={() => setSpecialisation("Cooking")} />
                     <label htmlFor="cooking">Preparing Food</label>
                 </div>
                 )}
