@@ -3,9 +3,11 @@ import axios from 'axios';
 import { BASE_URL } from '../../config';
 import { AuthContext } from '../../App';
 import Title from '../HomePage/Title';
+import AllAplications from '../ApplicationForm/AllApplications';
 
 const SpecOrders = () => {
     const [orders, setOrders] = useState<any[]>([]);
+    const [appliedOrders, setAppliedOrders] = useState<number[]>([]);
     const { loggedInUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -46,11 +48,13 @@ const SpecOrders = () => {
                     "x-access-token": loggedInUser.token,
                 }
             });
+            setAppliedOrders([...appliedOrders, orderId]); 
             fetchOrders();
         } catch (error) {
             console.error('Error applying:', error);
         }
     };
+
 
     return (
         <div>
@@ -83,12 +87,19 @@ const SpecOrders = () => {
                             <td>{order.first_name}</td>
                             <td>{order.last_name}</td>
                             <td>
-                                <button onClick={() => handleApply(order.id)}>Apply</button>
+                                <button
+                                    onClick={() => handleApply(order.id)}
+                                    disabled={appliedOrders.includes(order.id)}
+                                    style={{ backgroundColor: appliedOrders.includes(order.id) ? 'red' : 'default' }}
+                                >
+                                    {appliedOrders.includes(order.id) ? 'Applied' : 'Apply'}</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <h3>All orders</h3>
+            <AllAplications/>
         </div>
     );
 };

@@ -104,3 +104,27 @@ export const newOrders = async (id: number): Promise<Order[]> => {
         throw new Error('Failed to fetch pending orders');
     }
 };
+
+export const getAllApplications = async () => {
+    try {
+        const applications = await db
+            .select([
+                'applications.id',
+                'applications.date',
+                'applications.specialisation',
+                'applications.status',
+                'clients.first_name as client_first_name',
+                'clients.last_name as client_last_name',
+                'specialists.first_name as specialist_first_name',
+                'specialists.last_name as specialist_last_name'
+            ])
+            .from('applications')
+            .leftJoin('clients', 'applications.client_id', 'clients.id')
+            .leftJoin('specialists', 'applications.specialist_id', 'specialists.id');
+
+        return applications;
+    } catch (error) {
+        console.error('Error fetching applications:', error);
+        throw new Error('Failed to fetch applications');
+    }
+};
