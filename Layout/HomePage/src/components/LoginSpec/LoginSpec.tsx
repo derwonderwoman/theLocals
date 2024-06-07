@@ -9,7 +9,7 @@ import { BASE_URL } from '../../config';
 const LoginSpec = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const {setLoggedInUser} = useContext(AuthContext);
+    const {loggedInUser, setLoggedInUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
@@ -17,7 +17,8 @@ const LoginSpec = () => {
         try {
             const response = await axios.post(`${BASE_URL}/specialist/login`, {
                 email,
-                password 
+                password,
+                client_id: loggedInUser.id,
             }, { withCredentials: true });
 
             if (response.status === 200) {

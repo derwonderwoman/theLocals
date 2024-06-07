@@ -38,6 +38,7 @@ const SpecOrders = () => {
     return (
         <div>
             <Title/>
+            <h1>Hello, {loggedInUser.first_name}!</h1>
             <hr />
             <h2>You can apply to these orders</h2>
             <table className="table table-hover">
