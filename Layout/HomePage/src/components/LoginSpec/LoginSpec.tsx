@@ -2,7 +2,7 @@ import { useState, useContext, FormEvent } from 'react';
 import Title from '../HomePage/Title';
 import axios from "axios";
 import { AuthContext } from '../../App';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { BASE_URL } from '../../config';
 
 
@@ -48,7 +48,7 @@ const LoginSpec = () => {
                 </form>
                 <hr />
                 <h2> Please login first and we will find you your best match!</h2>
-                <h3>If you are not registered yet, please sign in <a href='/register'>here</a></h3>
+                <h3>If you are not registered yet, please sign in <Link to="/register"> here</Link></h3> 
             </div>
         </>
     );

@@ -2,9 +2,8 @@ import { useState, useContext, FormEvent } from 'react';
 import Title from '../HomePage/Title';
 import axios from "axios";
 import { AuthContext } from '../../App';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import { BASE_URL } from '../../config';
-import { Link } from 'react-router-dom';
 
 const LoginClient = () => {
     const [email, setEmail] = useState<string>("");

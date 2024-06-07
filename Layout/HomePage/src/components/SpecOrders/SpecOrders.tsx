@@ -24,6 +24,7 @@ const SpecOrders = () => {
                 }
             });
             setOrders(response.data);
+            console.log(response.data);
         } catch (error) {
             console.error('Error fetching orders:', error);
         }
@@ -37,7 +38,7 @@ const SpecOrders = () => {
 
     const handleApply = async (orderId: number) => {
         try {
-            await axios.put(`${BASE_URL}/applications/${orderId}`, {
+            await axios.put(`${BASE_URL}/client/applications/${orderId}`, {
                 status: 'waiting for approving'
             }, {
                 withCredentials: true,
@@ -61,6 +62,7 @@ const SpecOrders = () => {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Order id</th>
                         <th scope="col">Date</th>
                         <th scope="col">Town</th>
                         <th scope="col">Time</th>
@@ -73,6 +75,7 @@ const SpecOrders = () => {
                     {orders.map((order, index) => (
                         <tr key={index}>
                             <th scope="row">{index + 1}</th>
+                            <td>{order.id}</td>
                             <td>{formatDate(order.date)}</td>
                             <td>{order.town}</td>
                             <td>{order.time}</td>
