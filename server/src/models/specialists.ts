@@ -1,6 +1,7 @@
 import { db } from "../index";
 
 interface Order {
+    id:number;
     date: Date;
     time: string;
     rate_per_hour: number;
