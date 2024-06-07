@@ -79,7 +79,7 @@ export const register = async ({
 export const login = async (email: string): Promise<Specialist | undefined> => {
     try {
         const specialist: Specialist | undefined = await db("specialists")
-            .select("id", "email", "password")
+            .select("id", "email", "password", "first_name", "last_name", "specialisation")
             .where({ email })
             .first();
 

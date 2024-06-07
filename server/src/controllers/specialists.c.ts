@@ -47,11 +47,6 @@ export const _login_spec = async (req: Request, res: Response): Promise<void> =>
             expiresIn: ACCESS_TOKEN_EXPIRY
         });
 
-        res.cookie("token", accessToken, {
-            httpOnly: true,
-            maxAge: 60 * 1000
-        });
-
         res.json({ token: accessToken, type:"specialist", id: specialist.id, first_name: specialist.first_name, last_name: specialist.last_name, specialisation: specialist.specialisation });
     } catch (error) {
         console.error("_login", error);
