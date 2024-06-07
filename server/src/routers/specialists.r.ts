@@ -8,6 +8,6 @@ router.post("/register", _register_spec);
 router.post("/login", _login_spec);
 router.get("/orders",verifyToken, getNewOrders);
 router.get("/applications",_getAllApplications);
-router.get("/applications/:id", _getApplication);
+router.put("/applications/:id", _getApplication);
 
 export default router;

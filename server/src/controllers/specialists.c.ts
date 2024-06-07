@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { register, login, newOrders, getAllApplications, getApplication} from "../models/specialists";
+import { register, login, newOrders, getAllApplications, getApplication, updateApplicationStatus} from "../models/specialists";
 import { orderslist } from "../models/clients";
 dotenv.config();
 
@@ -114,3 +114,15 @@ export const _getAllApplications = async (req: Request, res: Response) => {
       res.status(500).json({ error: 'Failed to fetch orders' });
     }
   };
+
+  export const _updateApplicationStatus = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status, specialist_id } = req.body;
+    try {
+        await updateApplicationStatus(parseInt(id), status, parseInt(specialist_id));
+        res.json({ message: 'Application status updated successfully' });
+    } catch (error) {
+        console.error('Error updating:', error);
+        res.status(500).json({ error: 'Failed to update application status' });
+    }
+};
