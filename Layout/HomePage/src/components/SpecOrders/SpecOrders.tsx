@@ -7,7 +7,6 @@ import AllAplications from '../ApplicationForm/AllApplications';
 
 const SpecOrders = () => {
     const [orders, setOrders] = useState<any[]>([]);
-    const [appliedOrders, setAppliedOrders] = useState<number[]>([]);
     const { loggedInUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -49,7 +48,6 @@ const SpecOrders = () => {
                     "x-access-token": loggedInUser.token,
                 }
             });
-            setAppliedOrders([...appliedOrders, orderId]); 
             fetchOrders();
         } catch (error) {
             console.error('Error applying:', error);
@@ -90,10 +88,10 @@ const SpecOrders = () => {
                             <td>
                                 <button
                                     onClick={() => handleApply(order.id)}
-                                    disabled={appliedOrders.includes(order.id)}
-                                    style={{ backgroundColor: appliedOrders.includes(order.id) ? 'red' : 'default' }}
+                                    disabled={order.status !== 'pending'}
+                                    style={{ backgroundColor: order.status !== 'pending' ? 'blue' : 'default' }}
                                 >
-                                    {appliedOrders.includes(order.id) ? 'Applied' : 'Apply'}</button>
+                                    {order.status !== 'pending' ? 'Applied' : 'Apply'}</button>
                             </td>
                         </tr>
                     ))}

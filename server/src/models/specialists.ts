@@ -157,11 +157,11 @@ export const getApplication = async (orderId:number) => {
 export const updateApplicationStatus = async (orderId: number, status: string, specialistId: number): Promise<void> => {
     try {
         await db('applications')
-            .where('id', orderId)
             .update({
                 status,
                 specialist_id: specialistId
-            });
+            })
+            .where('id', orderId);
     } catch (error) {
         console.error('Error updating application status:', error);
         throw new Error('Failed to update application status');
