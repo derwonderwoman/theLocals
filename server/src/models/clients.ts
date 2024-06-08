@@ -170,7 +170,7 @@ export const deleteOrder = async (orderId: number): Promise<void> => {
 
 export const editOrder = async (orderId: number, date: Date): Promise<void> => {
     try {
-        await db('applications').where('id', orderId).update(date);
+        await db('applications').where('id', orderId).update({date});
     } catch (error) {
         console.error('Error deleting order:', error);
         throw new Error('Failed to delete order');
