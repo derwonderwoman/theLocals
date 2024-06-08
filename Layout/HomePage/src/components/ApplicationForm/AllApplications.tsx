@@ -60,9 +60,9 @@ const AllAplications = () => {
                             <td>{order.client_first_name}</td>
                             <td>{order.client_last_name}</td>
                             <td>{order.specialisation}</td>
-                            <td>{order.status}</td>
                             <td>{order.specialist_first_name}</td>
                             <td>{order.specialist_last_name}</td>
+                            <td>{order.status}</td>
                         </tr>
                     ))}
                 </tbody>
