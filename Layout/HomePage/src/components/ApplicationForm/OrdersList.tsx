@@ -132,6 +132,7 @@ const OrdersList = () => {
                             <td>{order.status}</td>
                             <td>{order.first_name}</td>
                             <td>{order.last_name}</td>
+                            <td>{order.status === 'approved' ? order.phone_number : '-'}</td>
                             <td>
                                 <button onClick={() => handleEdit(order.id, order)}>Edit</button>
                             </td>

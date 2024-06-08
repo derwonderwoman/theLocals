@@ -132,7 +132,8 @@ export const orderslist = async () => {
           'applications.status',
           'applications.id',
           'specialists.first_name',
-          'specialists.last_name'
+          'specialists.last_name',
+          'specialists.phone_number'
         ])
         .from('applications')
         .leftJoin('specialists', 'applications.specialist_id', 'specialists.id');
