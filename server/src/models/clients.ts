@@ -143,3 +143,17 @@ export const orderslist = async () => {
       throw new Error('Failed to fetch orders');
     }
   };
+
+  export const updateApplicationStatustoApprove = async (orderId: number, status: string, clientId: number): Promise<void> => {
+    try {
+        await db('applications')
+            .update({
+                status,
+                client_id: clientId
+            })
+            .where('id', orderId);
+    } catch (error) {
+        console.error('Error updating application status:', error);
+        throw new Error('Failed to update application status');
+    }
+};
