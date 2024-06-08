@@ -94,7 +94,7 @@ export const login = async (email: string): Promise<Specialist | undefined> => {
 export const newOrders = async (id: number): Promise<Order[]> => {
     try {
         const orders: Order[] = await db('applications')
-            .select('applications.id','applications.date', 'applications.time', 'applications.rate_per_hour', 'applications.town', 'clients.first_name', 'clients.last_name')
+            .select('applications.id','applications.date', 'applications.time','applications.status', 'applications.rate_per_hour', 'applications.town', 'clients.first_name', 'clients.last_name')
             .join('clients', 'applications.client_id','clients.id')
             .where('applications.status', '=', 'pending')
             .andWhere('applications.specialisation', db('specialists').select('specialisation').where('id', id).first());
