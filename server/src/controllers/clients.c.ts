@@ -165,9 +165,9 @@ export const _deleteOrder = async (req: Request, res: Response): Promise<void> =
 
 export const _editOrder = async (req: Request, res: Response): Promise<void> => {
     const orderId: number = parseInt(req.params.id);
-    const updatedData = req.body;
+    const {date} = req.body;
     try {
-        await editOrder(orderId, updatedData);
+        await editOrder(orderId, date);
         res.status(200).send();
     } catch (error) {
         console.error('Error updating order:', error);

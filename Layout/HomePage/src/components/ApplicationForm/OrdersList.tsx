@@ -11,7 +11,7 @@ interface FormData {
 const OrdersList = () => {
     const [orders, setOrders] = useState<any[]>([]);
     const [editOrderId, setEditOrderId] = useState<number | null>(null);
-    const [formData, setFormData] = useState<any>({});
+    const [formData, setFormData] = useState<FormData>({});
     const { loggedInUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -72,20 +72,18 @@ const OrdersList = () => {
 
     const handleEdit = (orderId: number, date: Date) => {
         setEditOrderId(orderId);
-        setFormData(date);
+        setFormData({date});
     };
 
     const handleCloseEdit = () => {
         setEditOrderId(null);
-        setFormData({});
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData((prevData:FormData) => ({
-            ...prevData,
-            [name]: value
-        }));
+        const { value } = e.target;
+        setFormData({
+            date: new Date(value)
+        });
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -159,7 +157,7 @@ const OrdersList = () => {
                     <h2>Edit Order</h2>
                     <form onSubmit={handleSubmit}>
                         <label>Date:</label>
-                        <input type="date" name="date" value={formData.date} onChange={handleChange} />
+                        <input type="date" name="date" value={formData.date.getDate()} onChange={handleChange} />
                         <button type="submit">Update</button>
                         <button type="button" onClick={handleCloseEdit}>Cancel</button>
                     </form>
