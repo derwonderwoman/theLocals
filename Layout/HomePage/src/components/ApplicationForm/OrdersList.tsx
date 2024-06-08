@@ -135,7 +135,7 @@ const OrdersList = () => {
                             <td>{order.last_name}</td>
                             <td>{order.status === 'approved' ? order.phone_number : '-'}</td>
                             <td>
-                                <button onClick={() => handleEdit(order.id, order)}>Edit</button>
+                                <button onClick={() => handleEdit(order.id, order.date)}>Edit</button>
                             </td>
                             <td>
                                 <button onClick={() => handleDelete(order.id)}>Delete</button>
