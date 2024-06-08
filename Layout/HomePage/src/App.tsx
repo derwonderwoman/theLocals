@@ -49,7 +49,7 @@ function App() {
         <Route path = "/client/application" element = {<Auth><Application/></Auth>}/>
         <Route path = "/specialist/orders" element = {<Auth><SpecOrders/></Auth>}/>
         <Route path = "/client/orderslist" element = {<Auth><OrdersList/></Auth>} />
-        <Route path = "/specialist/applications" element = {<Auth><AllAplications/></Auth>}/>
+        <Route path = "/specialist/applications" element = {<Auth><AllAplications pendingOrders={[]}/></Auth>}/>
       </Routes>
     </div>
     </AuthContext.Provider>
