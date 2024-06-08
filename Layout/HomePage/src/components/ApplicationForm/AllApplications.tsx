@@ -4,7 +4,7 @@ import { BASE_URL } from '../../config';
 import { AuthContext } from '../../App';
 import Title from '../HomePage/Title';
 
-const AllAplications = () => {
+const AllAplications = ({pendingOrders}:{pendingOrders:any[]} ) => {
     const [orders, setOrders] = useState<any[]>([]);
     const { loggedInUser } = useContext(AuthContext);
 
@@ -24,7 +24,7 @@ const AllAplications = () => {
         };
 
         fetchOrders();
-    }, []);
+    }, [pendingOrders]);
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);

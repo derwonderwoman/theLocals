@@ -97,7 +97,7 @@ const SpecOrders = () => {
                     ))}
                 </tbody>
             </table>
-            <AllAplications/>
+            <AllAplications pendingOrders={orders}/>
         </div>
     );
 };
