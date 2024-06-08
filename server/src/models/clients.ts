@@ -157,3 +157,12 @@ export const orderslist = async () => {
         throw new Error('Failed to update application status');
     }
 };
+
+export const deleteOrder = async (orderId: number): Promise<void> => {
+    try {
+        await db('applications').where('id', orderId).del();
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        throw new Error('Failed to delete order');
+    }
+};
