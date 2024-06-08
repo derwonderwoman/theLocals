@@ -157,7 +157,7 @@ const OrdersList = () => {
                     <h2>Edit Order</h2>
                     <form onSubmit={handleSubmit}>
                         <label>Date:</label>
-                        <input type="date" name="date" value={formData.date.getDate()} onChange={handleChange} />
+                        <input type="date" name="date" onChange={handleChange} />
                         <button type="submit">Update</button>
                         <button type="button" onClick={handleCloseEdit}>Cancel</button>
                     </form>
