@@ -152,7 +152,7 @@ export const getOrders = async (req: Request, res: Response) => {
 };
 
 export const _deleteOrder = async (req: Request, res: Response): Promise<void> => {
-    const orderId: number = parseInt(req.params.orderId);
+    const orderId: number = parseInt(req.params.id);
 
     try {
         await deleteOrder(orderId);
@@ -164,7 +164,7 @@ export const _deleteOrder = async (req: Request, res: Response): Promise<void> =
 };
 
 export const _editOrder = async (req: Request, res: Response): Promise<void> => {
-    const orderId: number = parseInt(req.params.orderId);
+    const orderId: number = parseInt(req.params.id);
     const updatedData = req.body;
     try {
         await editOrder(orderId, updatedData);
