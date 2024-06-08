@@ -40,7 +40,7 @@ const OrdersList = () => {
 
     const handleApply = async (orderId: number) => {
         try {
-            await axios.put(`${BASE_URL}/client/orderslist/${orderId}`, {
+            await axios.put(`${BASE_URL}/client/orderslist/status/${orderId}`, {
                 status: 'approved',
                 client_id: loggedInUser.id
             }, {

@@ -9,7 +9,7 @@ router.post("/register", _register_client);
 router.post("/login", _login_client);
 router.post("/application",verifyToken, _createApplication);
 router.get("/orderslist",verifyToken, getOrders);
-router.put("/orderslist/:id",verifyToken, _updateApplicationStatustoApprove);
+router.put("/orderslist/status/:id",verifyToken, _updateApplicationStatustoApprove);
 router.delete("/orderslist/:id",verifyToken, _deleteOrder);
 router.put("/orderslist/:id",verifyToken, _editOrder);
 
