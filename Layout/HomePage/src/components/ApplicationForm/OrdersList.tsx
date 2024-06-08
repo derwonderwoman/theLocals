@@ -49,6 +49,21 @@ const OrdersList = () => {
         }
     };
 
+    const handleDelete = async (orderId: number) => {
+        try {
+            await axios.delete(`${BASE_URL}/client/orderslist/${orderId}`, {
+                withCredentials: true,
+                headers: {
+                    "x-access-token": loggedInUser.token,
+                }
+            });
+            const updatedOrders = orders.filter(order => order.id !== orderId);
+            setOrders(updatedOrders);
+        } catch (error) {
+            console.error('Error deleting order:', error);
+        }
+    };
+
 
     return (
         <div>
@@ -81,13 +96,13 @@ const OrdersList = () => {
                                 <button>Edit</button>
                             </td>
                             <td>
-                                <button>Delete</button>
+                                <button onClick={() => handleDelete(order.id)}>Delete</button>
                             </td>
                             <td>
                                 <button
                                     onClick={() => handleApply(order.id)}
                                     disabled={order.status === 'approved'}
-                                    style={{ backgroundColor: order.status === 'approved' ? 'grey' : 'default' }}
+                                    style={{ backgroundColor: order.status === 'approved' ? 'rgb(100, 108, 255)' : 'default' }}
                                 >
                                     {order.status === 'approved' ? 'Approved' : 'Approve'}</button>
                             </td>
