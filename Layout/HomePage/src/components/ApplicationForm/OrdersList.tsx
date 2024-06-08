@@ -120,6 +120,7 @@ const OrdersList = () => {
                         <th scope="col">Status of order</th>
                         <th scope="col">Specialist First Name</th>
                         <th scope="col">Specialist Last Name</th>
+                        <th scope="col">Specialist Phone Number</th>
                     </tr>
                 </thead>
                 <tbody>
