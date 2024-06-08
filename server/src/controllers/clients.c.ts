@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { register, login, application, orderslist,updateApplicationStatustoApprove, deleteOrder} from "../models/clients.js";
+import { register, login, application, orderslist,updateApplicationStatustoApprove, deleteOrder, editOrder} from "../models/clients.js";
 import { stat } from "fs/promises";
 
 dotenv.config();
@@ -160,5 +160,17 @@ export const _deleteOrder = async (req: Request, res: Response): Promise<void> =
     } catch (error) {
         console.error('Error deleting order:', error);
         res.status(500).json({ error: 'Failed to delete order' }); 
+    }
+};
+
+export const _editOrder = async (req: Request, res: Response): Promise<void> => {
+    const orderId: number = parseInt(req.params.orderId);
+    const updatedData = req.body;
+    try {
+        await editOrder(orderId, updatedData);
+        res.status(200).send();
+    } catch (error) {
+        console.error('Error updating order:', error);
+        res.status(500).json({ error: 'Failed to update order' }); 
     }
 };

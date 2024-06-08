@@ -166,3 +166,12 @@ export const deleteOrder = async (orderId: number): Promise<void> => {
         throw new Error('Failed to delete order');
     }
 };
+
+export const editOrder = async (orderId: number, updatedData: any): Promise<void> => {
+    try {
+        await db('applications').where('id', orderId).update(updatedData);
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        throw new Error('Failed to delete order');
+    }
+};
