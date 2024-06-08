@@ -142,10 +142,10 @@ const OrdersList = () => {
                                 <td>
                                 <button
                                     onClick={() => handleApply(order.id)}
-                                    disabled={order.status !== 'pending'}
-                                    style={{ backgroundColor: order.status === 'approved' ? 'rgb(100, 108, 255)' : 'default' }}
+                                    disabled={order.status !== 'pending' && order.status !== 'waiting'}
+                                    style={{ backgroundColor: order.status === 'approved'  ? 'rgb(100, 108, 255)' : 'default' }}
                                 >
-                                    {order.status !== 'waiting' ? 'Approve' : 'Approved'}</button>
+                                    {order.status !== 'waiting' ? 'Approved' : 'Approve'}</button>
                             </td>
                             )}
                         </tr>
