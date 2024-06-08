@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/register", _register_spec);
 router.post("/login", _login_spec);
 router.get("/orders",verifyToken, getNewOrders);
-router.get("/applications",_getAllApplications);
-router.put("/applications/:id", _updateApplicationStatus);
+router.get("/applications",verifyToken,_getAllApplications);
+router.put("/applications/:id",verifyToken, _updateApplicationStatus);
 
 export default router;
