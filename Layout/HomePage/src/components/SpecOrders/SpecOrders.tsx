@@ -88,10 +88,10 @@ const SpecOrders = () => {
                             <td>
                                 <button
                                     onClick={() => handleApply(order.id)}
-                                    disabled={order.status !== 'pending'}
+                                    disabled={order.status !== 'pending' && order.status !== 'waiting'}
                                     style={{ backgroundColor: order.status !== 'pending' ? 'rgb(100, 108, 255)' : 'default' }}
                                 >
-                                    {order.status !== 'pending' ? 'Applied' : 'Apply'}</button>
+                                    {order.status === 'waiting'  ? 'Applied' : 'Apply'}</button>
                             </td>
                         </tr>
                     ))}
