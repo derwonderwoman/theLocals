@@ -9,6 +9,7 @@ import {useState, createContext} from "react";
 import Auth from './Auth/Auth';
 import OrdersList from './components/ApplicationForm/OrdersList';
 import SpecOrders from './components/SpecOrders/SpecOrders';
+import AllAplications from './components/ApplicationForm/AllApplications';
 
 interface LoggedInUser {
   id:number;
@@ -48,6 +49,7 @@ function App() {
         <Route path = "/client/application" element = {<Auth><Application/></Auth>}/>
         <Route path = "/specialist/orders" element = {<Auth><SpecOrders/></Auth>}/>
         <Route path = "/client/orderslist" element = {<Auth><OrdersList/></Auth>} />
+        <Route path = "/specialist/applications" element = {<Auth><AllAplications/></Auth>}/>
       </Routes>
     </div>
     </AuthContext.Provider>
