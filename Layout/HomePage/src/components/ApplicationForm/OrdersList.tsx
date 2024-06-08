@@ -126,8 +126,8 @@ const OrdersList = () => {
                     {orders.map((order, index) => (
                         <tr key={order.id}>
                             <th scope="row">{index + 1}</th>
-                            <td>{formatDate(order.date)}</td>
                             <td>{order.id}</td>
+                            <td>{formatDate(order.date)}</td>
                             <td>{order.specialisation}</td>
                             <td>{order.status}</td>
                             <td>{order.first_name}</td>
