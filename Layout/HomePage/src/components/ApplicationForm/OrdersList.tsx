@@ -138,7 +138,8 @@ const OrdersList = () => {
                             <td>
                                 <button onClick={() => handleDelete(order.id)}>Delete</button>
                             </td>
-                            <td>
+                            { order.status === "waiting" && (
+                                <td>
                                 <button
                                     onClick={() => handleApply(order.id)}
                                     disabled={order.status === 'approved'}
@@ -146,6 +147,7 @@ const OrdersList = () => {
                                 >
                                     {order.status === 'approved' ? 'Approved' : 'Approve'}</button>
                             </td>
+                            )}
                         </tr>
                     ))}
                 </tbody>
