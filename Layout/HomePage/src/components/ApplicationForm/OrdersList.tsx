@@ -11,7 +11,7 @@ interface FormData {
 const OrdersList = () => {
     const [orders, setOrders] = useState<any[]>([]);
     const [editOrderId, setEditOrderId] = useState<number | null>(null);
-    const [formData, setFormData] = useState<FormData>({});
+    const [formData, setFormData] = useState<FormData>({date: new Date()});
     const { loggedInUser } = useContext(AuthContext);
 
     useEffect(() => {
