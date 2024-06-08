@@ -147,7 +147,7 @@ const OrdersList = () => {
                                     disabled={order.status !== 'pending'}
                                     style={{ backgroundColor: order.status === 'approved' ? 'rgb(100, 108, 255)' : 'default' }}
                                 >
-                                    {order.status === 'approved' ? 'Approved' : 'Approve'}</button>
+                                    {order.status !== 'waiting' ? 'Approve' : 'Approved'}</button>
                             </td>
                             )}
                         </tr>
