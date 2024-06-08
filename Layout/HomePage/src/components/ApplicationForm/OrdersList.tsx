@@ -5,7 +5,7 @@ import { AuthContext } from '../../App';
 import Title from '../HomePage/Title';
 
 interface FormData {
-
+    date:Date;
 }
 
 const OrdersList = () => {
@@ -70,9 +70,9 @@ const OrdersList = () => {
         }
     };
 
-    const handleEdit = (orderId: number, initialData: any) => {
+    const handleEdit = (orderId: number, date: Date) => {
         setEditOrderId(orderId);
-        setFormData(initialData);
+        setFormData(date);
     };
 
     const handleCloseEdit = () => {
