@@ -138,7 +138,7 @@ const OrdersList = () => {
                             <td>
                                 <button onClick={() => handleDelete(order.id)}>Delete</button>
                             </td>
-                            { order.status === "waiting" && (
+                            { order.status !== "pending" && (
                                 <td>
                                 <button
                                     onClick={() => handleApply(order.id)}
