@@ -1,5 +1,4 @@
 import { db, mailSender } from "../index";
-// import nodemailer from "nodemailer";
 import { Recipient, EmailParams, Sender } from "mailersend";
 
 interface Order {

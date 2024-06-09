@@ -1,5 +1,6 @@
-import { db} from "../index";
+import { db, mailSender} from "../index";
 import dotenv from "dotenv";
+import { Recipient, EmailParams, Sender } from "mailersend";
 
 dotenv.config();
 
@@ -156,7 +157,29 @@ export const orderslist = async () => {
                 client_id: clientId
             })
             .where('id', orderId);
-
+            if (status === "approved") {
+                const specialist = await db("applications")
+                  .select("specialists.email")
+                  .where("applications.id", orderId)
+                  .join("specialists", "specialists.id", "applications.specialist_id")
+                  .first();
+                console.log(specialist);
+          
+                if (specialist) {
+                  const recipients = [new Recipient(specialist.email, specialist.first_name)];
+          
+                  const emailParams = new EmailParams()
+                    .setFrom(new Sender(process.env.EMAIL as string, "theLocals"))
+                    .setTo(recipients)
+                    .setSubject("Your application status has changed")
+                    .setText(
+                      "Dear specialist, there's a new order you might be interested in, you can get his phone number after approval. Please check your dashboard for more details.Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
+                    );
+          
+                  mailSender.email.send(emailParams)
+                   .catch(error => console.log(error));
+                }
+              }
 
 /////
 
