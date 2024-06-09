@@ -11,7 +11,7 @@ import OrdersList from './components/ApplicationForm/OrdersList';
 import SpecOrders from './components/SpecOrders/SpecOrders';
 import AllAplications from './components/ApplicationForm/AllApplications';
 
-interface LoggedInUser {
+export interface LoggedInUser {
   id:number;
   email:string;
   first_name:string;
