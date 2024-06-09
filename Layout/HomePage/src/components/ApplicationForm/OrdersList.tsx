@@ -20,7 +20,7 @@ const OrdersList = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/client/orderslist`, {
+            const response = await axios.get(`${BASE_URL}/client/orderslist/${loggedInUser.id}`, {
                 withCredentials: true,
                 headers: {
                     "x-access-token": loggedInUser.token,

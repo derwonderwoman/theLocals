@@ -1,5 +1,5 @@
 import express from "express";
-import { _register_client, _login_client, _createApplication, getOrders, _updateApplicationStatustoApprove, _deleteOrder, _editOrder} from "../controllers/clients.c";
+import { _register_client, _login_client, _createApplication, getOrders, _updateApplicationStatustoApprove, _deleteOrder, _editOrder, _getClientOrders} from "../controllers/clients.c";
 import { verifyToken } from "../middleware/verifyToken";
 
 
@@ -12,5 +12,6 @@ router.get("/orderslist",verifyToken, getOrders);
 router.put("/orderslist/status/:id",verifyToken, _updateApplicationStatustoApprove);
 router.delete("/orderslist/:id",verifyToken, _deleteOrder);
 router.put("/orderslist/:id",verifyToken, _editOrder);
+router.get("/orderslist/:id", verifyToken, _getClientOrders);
 
 export default router;

@@ -133,7 +133,7 @@ export const application = async ({
                     const emailParams = new EmailParams()
                         .setFrom(new Sender(process.env.EMAIL as string, "theLocals"))
                         .setTo(recipients)
-                        .setSubject("New order")
+                        .setSubject("New Order")
                         .setText(
                             "Dear specialist, there's a new order you might be interested in, you can get his phone number after approval. Please check your dashboard for more details. Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
                         );
@@ -171,6 +171,30 @@ export const orderslist = async () => {
       throw new Error('Failed to fetch orders');
     }
   };
+
+  export const getClientOrders = async (clientId: number) => { 
+    try {
+        const orders = await db
+        .select([
+            'applications.date',
+            'applications.specialisation',
+            'applications.status',
+            'applications.id',
+            'specialists.first_name',
+            'specialists.last_name',
+            'specialists.phone_number'
+          ])
+        .from('applications')
+        .leftJoin('specialists', 'applications.specialist_id', 'specialists.id')
+        .where("applications.client_id", clientId);
+
+        return orders;
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      throw new Error('Failed to fetch orders');
+    }
+  };
+
 
   export const updateApplicationStatustoApprove = async (orderId: number, status: string, clientId: number): Promise<void> => {
     try {
