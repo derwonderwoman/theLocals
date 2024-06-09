@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@types/nodemailer-direct-transport": "^1.0.35",
+    "@types/nodemailer-smtp-transport": "^2.7.8",
     "nodemailer": "^6.9.13"
   },
   "devDependencies": {
