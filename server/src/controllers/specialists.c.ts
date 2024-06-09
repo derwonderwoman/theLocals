@@ -117,9 +117,9 @@ export const _getAllApplications = async (req: Request, res: Response) => {
 
   export const _updateApplicationStatus = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { status, specialist_id, client_id } = req.body;
+    const { status, specialist_id } = req.body;
     try {
-        await updateApplicationStatus(parseInt(id), status, parseInt(specialist_id), parseInt(client_id));
+        await updateApplicationStatus(parseInt(id), status, parseInt(specialist_id));
         res.json({ message: 'Application status updated successfully' });
     } catch (error) {
         console.error('Error updating:', error);
