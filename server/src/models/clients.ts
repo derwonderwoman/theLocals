@@ -98,7 +98,8 @@ export const application = async ({
     date,
     time,
     rate_per_hour,
-    status
+    status,
+    id
 }: Application): Promise<Application> => {
     try {
         const [application]: Application[] = await db("applications").insert({
@@ -119,6 +120,30 @@ export const application = async ({
                 "rate_per_hour",
                 "status"
             ]);
+
+            if (status === "pending") {
+                const specialist = await db("applications")
+                  .select("specialists.email")
+                  .where("applications.id", id)
+                  .join("specialists", "specialists.id", "applications.specialist_id")
+                  .first();
+                console.log(specialist);
+          
+                if (specialist) {
+                  const recipients = [new Recipient(specialist.email, specialist.first_name)];
+          
+                  const emailParams = new EmailParams()
+                    .setFrom(new Sender(process.env.EMAIL as string, "theLocals"))
+                    .setTo(recipients)
+                    .setSubject("Your application status has changed")
+                    .setText(
+                      "Dear specialist, there's a new order you might be interested in, you can get his phone number after approval. Please check your dashboard for more details.Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
+                    );
+          
+                  mailSender.email.send(emailParams)
+                   .catch(error => console.log(error));
+                }
+              }
 
         return application;
     } catch (error) {
@@ -173,7 +198,7 @@ export const orderslist = async () => {
                     .setTo(recipients)
                     .setSubject("Your application status has changed")
                     .setText(
-                      "Dear specialist, there's a new order you might be interested in, you can get his phone number after approval. Please check your dashboard for more details.Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
+                      "Congratulations!Your application is approved. Please check your dashboard for more details.Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
                     );
           
                   mailSender.email.send(emailParams)
