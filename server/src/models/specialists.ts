@@ -209,7 +209,8 @@ export const updateApplicationStatus = async (
             "Dear client, we've found you a specialist, you can get his phone number after approval. Please check your dashboard for more details."
           );
 
-        mailSender.email.send(emailParams);
+        mailSender.email.send(emailParams)
+         .catch(error => console.log(error));
 
         // const mailOptions = {
         //     from: process.env.EMAIL,
