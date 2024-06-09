@@ -6,22 +6,25 @@ const LogOut = () => {
     const { setLoggedInUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    setLoggedInUser({
-        id:0,
-        email:"",
-        first_name:"",
-        last_name:"",
-        phone_number:"",
-        town:"",
-        type:"client",
-        token: ""
-    });
+    const handleLogout = () => {
+        setLoggedInUser({
+            id:0,
+            email:"",
+            first_name:"",
+            last_name:"",
+            phone_number:"",
+            town:"",
+            type:"client",
+            token: ""
+        });
+    
+        localStorage.removeItem('loggedInUser');
+        navigate("/");
+    }
 
-    localStorage.removeItem('loggedInUser');
-    navigate("/");
     return (
         <div>
-            <button id="loginspec">Log Out</button>
+            <button onClick={handleLogout} id="loginspec">Log Out</button>
         </div>
     );
 }
