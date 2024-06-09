@@ -205,7 +205,7 @@ export const updateApplicationStatus = async (
           .setTo(recipients)
           .setSubject("Your application status has changed")
           .setText(
-            "Dear client, we've found you a specialist, you can get his phone number after approval. Please check your dashboard for more details."
+            "Dear client, we've found you a specialist, you can get his phone number after approval. Please check your dashboard for more details.Here is the link to log in: https://thelocals-fe.onrender.com/#/client/login"
           );
 
         mailSender.email.send(emailParams)

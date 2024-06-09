@@ -72,6 +72,7 @@ const SpecOrders = () => {
                         <th scope="col">Rate per hour</th>
                         <th scope="col">Client's First Name</th>
                         <th scope="col">Client's Last Name</th>
+                        <th scope="col">Client's Phone Number</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,6 +86,7 @@ const SpecOrders = () => {
                             <td>{order.rate_per_hour}</td>
                             <td>{order.first_name}</td>
                             <td>{order.last_name}</td>
+                            <td>{order.status === 'approved' ? order.phone_number : '-'}</td>
                             <td>
                                 <button
                                     onClick={() => handleApply(order.id)}
