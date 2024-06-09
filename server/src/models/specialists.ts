@@ -160,9 +160,10 @@ export const updateApplicationStatus = async (orderId: number, status: string, s
         await db('applications')
             .update({
                 status,
-                specialist_id: specialistId
+                specialist_id: specialistId,
+                client_id: client_id,
             })
-            .where('id', orderId);
+            .where('applications.id', orderId);
 
             if (status === 'waiting') {
                 const client = await db("clients")
