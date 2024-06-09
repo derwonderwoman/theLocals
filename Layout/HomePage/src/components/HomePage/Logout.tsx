@@ -19,7 +19,8 @@ const LogOut = () => {
         });
     
         localStorage.removeItem('loggedInUser');
-        navigate("/");
+        alert("You've been logged out")
+        navigate("/client/login");
     }
 
     return (
