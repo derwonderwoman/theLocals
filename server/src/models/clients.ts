@@ -98,8 +98,7 @@ export const application = async ({
     date,
     time,
     rate_per_hour,
-    status,
-    id
+    status
 }: Application): Promise<Application> => {
     try {
         const [application]: Application[] = await db("applications").insert({
@@ -109,7 +108,7 @@ export const application = async ({
                 date,
                 time,
                 rate_per_hour,
-                status
+                status, 
             }, [
                 "id",
                 "client_id",
@@ -124,7 +123,7 @@ export const application = async ({
             if (status === "pending") {
                 const specialist = await db("applications")
                   .select("specialists.email")
-                  .where("applications.id", id)
+                  .where("applications.id", application.id)
                   .join("specialists", "specialists.id", "applications.specialist_id")
                   .first();
                 console.log(specialist);
