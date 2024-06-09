@@ -133,7 +133,7 @@ export const application = async ({
                     const emailParams = new EmailParams()
                         .setFrom(new Sender(process.env.EMAIL as string, "theLocals"))
                         .setTo(recipients)
-                        .setSubject("Your application status has changed")
+                        .setSubject("New order")
                         .setText(
                             "Dear specialist, there's a new order you might be interested in, you can get his phone number after approval. Please check your dashboard for more details. Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
                         );
