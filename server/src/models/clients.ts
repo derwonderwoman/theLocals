@@ -121,28 +121,27 @@ export const application = async ({
             ]);
 
             if (status === "pending") {
-                const specialist = await db("applications")
-                  .select("specialists.email")
-                  .where("applications.id", application.id)
-                  .join("specialists", "specialists.id", "applications.specialist_id")
-                  .first();
-                console.log(specialist);
-          
-                if (specialist) {
-                  const recipients = [new Recipient(specialist.email, specialist.first_name)];
-          
-                  const emailParams = new EmailParams()
-                    .setFrom(new Sender(process.env.EMAIL as string, "theLocals"))
-                    .setTo(recipients)
-                    .setSubject("Your application status has changed")
-                    .setText(
-                      "Dear specialist, there's a new order you might be interested in, you can get his phone number after approval. Please check your dashboard for more details.Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
-                    );
-          
-                  mailSender.email.send(emailParams)
-                   .catch(error => console.log(error));
+                const specialists = await db("applications")
+                    .select("specialists.email")
+                    .where("applications.id", application.id)
+                    .join("specialists", "specialists.specialisation", "applications.specialisation");
+                console.log(specialists);
+              
+                if (specialists) {
+                    const recipients = specialists.map(specialist => new Recipient(specialist.email, specialist.first_name));
+              
+                    const emailParams = new EmailParams()
+                        .setFrom(new Sender(process.env.EMAIL as string, "theLocals"))
+                        .setTo(recipients)
+                        .setSubject("Your application status has changed")
+                        .setText(
+                            "Dear specialist, there's a new order you might be interested in, you can get his phone number after approval. Please check your dashboard for more details. Here is the link to log in: https://thelocals-fe.onrender.com/#/specialist/login"
+                        );
+              
+                    mailSender.email.send(emailParams)
+                        .catch(error => console.log(error));
                 }
-              }
+            }
 
         return application;
     } catch (error) {
