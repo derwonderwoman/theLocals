@@ -42,6 +42,7 @@ const SpecOrders = () => {
             await axios.put(`${BASE_URL}/specialist/applications/${orderId}`, {
                 status: 'waiting',
                 specialist_id: loggedInUser.id
+                client_id: 
             }, {
                 withCredentials: true,
                 headers: {

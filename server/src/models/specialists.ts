@@ -155,20 +155,20 @@ export const getApplication = async (orderId:number) => {
 };
 
 
-export const updateApplicationStatus = async (orderId: number, status: string, specialistId: number, client_id: number): Promise<void> => {
+export const updateApplicationStatus = async (orderId: number, status: string, specialistId: number): Promise<void> => {
     try {
         await db('applications')
             .update({
                 status,
-                specialist_id: specialistId,
-                client_id: client_id,
+                specialist_id: specialistId
             })
             .where('applications.id', orderId);
 
             if (status === 'waiting') {
-                const client = await db("clients")
-                    .select("email")
-                    .where('clients.id', client_id)
+                const client = await db("applications")
+                    .select("clients.email")
+                    .where('applications.id', orderId)
+                    .join("clients", "clients.id", "applications.client_id")
                     .first();
                     console.log(client);
                               
