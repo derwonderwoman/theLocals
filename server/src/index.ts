@@ -35,10 +35,6 @@ app.use(cors({
     credentials:true,
 }));
 
-// app.get("/logout", (req, res) => {
-//   res.clearCookie("authToken"); 
-//   res.redirect("/login"); 
-// });
 app.use("/client", client_router);
 app.use("/specialist", spec_router);
 
