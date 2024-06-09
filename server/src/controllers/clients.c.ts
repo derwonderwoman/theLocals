@@ -141,7 +141,7 @@ export const getOrders = async (req: Request, res: Response) => {
 
   export const _getClientOrders = async (req: Request, res: Response) => {
     try {
-        const clientId: number = parseInt(req.params.client_id);
+        const clientId: number = parseInt(req.params.id);
         const orders = await getClientOrders(clientId);
         res.json(orders);
       } catch (error) {
