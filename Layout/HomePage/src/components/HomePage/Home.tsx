@@ -17,7 +17,7 @@ const Home = () => {
       <CallForRegistration/>
       <WelcomeInput/>
       {
-        loggedInUser.id === 0 && (
+        !loggedInUser || loggedInUser.id === 0 && (
           <>
               <LoginSpec/>
               <LoginClient/>
@@ -25,7 +25,7 @@ const Home = () => {
         )
       }
       {
-        loggedInUser.id !== 0 && (
+        loggedInUser && loggedInUser.id !== 0 && (
           <>
               <LogOut/>
           </>
