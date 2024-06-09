@@ -1,4 +1,4 @@
-import { db, transporter } from "../index";
+import { db} from "../index";
 import nodemailer from "nodemailer";
 
 interface Order {
@@ -163,6 +163,17 @@ export const updateApplicationStatus = async (orderId: number, status: string, s
                 specialist_id: specialistId
             })
             .where('applications.id', orderId);
+
+            const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                  type: 'OAuth2',
+                  user: process.env.EMAIL,
+                  clientId: process.env.CLIENT_ID,
+                  clientSecret: process.env.CLIENT_SECRET,
+                  refreshToken: process.env.REFRESH_TOKEN,
+                },
+              });
 
             if (status === 'waiting') {
                 const client = await db("applications")

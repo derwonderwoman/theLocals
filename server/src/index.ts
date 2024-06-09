@@ -5,9 +5,23 @@ import dotenv from "dotenv";
 import knex from "knex";
 import client_router from "./routers/clients.r";
 import spec_router from "./routers/specialists.r";
-import nodemailer from "nodemailer";
+import { google } from 'googleapis';
+import { OAuth2Client } from 'google-auth-library';
 dotenv.config();
 
+const tokenEndpoint = 'https://oauth2.googleapis.com/token';
+
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URI
+);
+
+const authUrl = oAuth2Client.generateAuthUrl({
+  access_type: 'offline',
+  scope: process.env.SCOPE,
+  redirect_uri: process.env.REDIRECT_URI  
+});
 
 export const db = knex({
     client: "pg",
@@ -18,17 +32,9 @@ export const db = knex({
       database: process.env.PGDATABASE,
       ssl: {rejectUnauthorized: false}
     },
-  });
-
-  export const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASS,
-},
 });
 
-  const app = express();
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,8 +44,30 @@ app.use(cors({
     credentials:true,
 }));
 
-app.use("/client", client_router)
-app.use("/specialist", spec_router)
+app.get("/auth/google", (req, res) => {
+  res.redirect(authUrl);
+});
+
+app.get("/auth/google/callback", async (req, res) => {
+  const code = req.query.code ? req.query.code.toString() : null;
+  if (!code) {
+    res.status(400).send("Authorization code is missing.");
+    return;
+  }
+  try {
+    const { tokens } = await oAuth2Client.getToken(code);
+    oAuth2Client.setCredentials(tokens);
+    const accessToken = tokens.access_token; 
+    const refreshToken = tokens.refresh_token;
+    res.send("Authentication successful!");
+  } catch (error) {
+    console.error("Error exchanging authorization code for tokens:", error);
+    res.status(500).send("Error exchanging authorization code for tokens");
+  }
+});
+
+app.use("/client", client_router);
+app.use("/specialist", spec_router);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
