@@ -6,6 +6,8 @@ import knex from "knex";
 import client_router from "./routers/clients.r";
 import spec_router from "./routers/specialists.r";
 import { google } from 'googleapis';
+import axios from "axios";
+import nodemailer from "nodemailer";
 import { OAuth2Client } from 'google-auth-library';
 dotenv.config();
 
@@ -34,6 +36,18 @@ export const db = knex({
     },
 });
 
+export const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    type: 'OAuth2',
+    user: process.env.EMAIL,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: 'default_refresh_token',
+    accessToken: 'default_access_token',
+  },
+});
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -55,10 +69,27 @@ app.get("/auth/google/callback", async (req, res) => {
     return;
   }
   try {
-    const { tokens } = await oAuth2Client.getToken(code);
+    const response = await axios.post(tokenEndpoint, {
+      code: code,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      redirect_uri: process.env.REDIRECT_URI,
+      grant_type: 'authorization_code'
+    });
+    const tokens = response.data;
     oAuth2Client.setCredentials(tokens);
     const accessToken = tokens.access_token; 
     const refreshToken = tokens.refresh_token;
+
+    transporter.set('auth', {
+      type: 'OAuth2',
+      user: process.env.EMAIL,
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      refreshToken: refreshToken,
+      accessToken: accessToken, 
+    });
+
     res.send("Authentication successful!");
   } catch (error) {
     console.error("Error exchanging authorization code for tokens:", error);
