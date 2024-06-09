@@ -211,21 +211,6 @@ export const updateApplicationStatus = async (
 
         mailSender.email.send(emailParams)
          .catch(error => console.log(error));
-
-        // const mailOptions = {
-        //     from: process.env.EMAIL,
-        //     to: client.email,
-        //     subject: 'Your application status has changed',
-        //     text: "."
-        // };
-
-        // transporter.sendMail(mailOptions, (error: Error | null, info: nodemailer.SentMessageInfo) => {
-        //     if (error) {
-        //         console.error('Error sending email:', error);
-        //     } else {
-        //         console.log('Email sent:', info.response);
-        //     }
-        // });
       }
     }
   } catch (error) {
