@@ -22,7 +22,7 @@ export const db = knex({
 
   export const transporter = nodemailer.createTransport({
     service: 'Gmail',
-auth: {
+    auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
 },

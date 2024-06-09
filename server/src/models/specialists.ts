@@ -1,4 +1,5 @@
 import { db, transporter } from "../index";
+import nodemailer from "nodemailer";
 
 interface Order {
     id:number;
@@ -179,7 +180,7 @@ export const updateApplicationStatus = async (orderId: number, status: string, s
                         text: "Dear client, we've found you a specialist, you can get his phone number after approval. Please check your dashboard for more details."
                     };
     
-                    transporter.sendMail(mailOptions, (error, info) => {
+                    transporter.sendMail(mailOptions, (error: Error | null, info: nodemailer.SentMessageInfo) => {
                         if (error) {
                             console.error('Error sending email:', error);
                         } else {
