@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import knex from "knex";
 import client_router from "./routers/clients.r";
 import spec_router from "./routers/specialists.r";
+import nodemailer from "nodemailer";
 dotenv.config();
 
 
@@ -18,6 +19,14 @@ export const db = knex({
       ssl: {rejectUnauthorized: false}
     },
   });
+
+  export const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASS,
+},
+});
 
   const app = express();
 

@@ -91,7 +91,8 @@ const SpecOrders = () => {
                                     disabled={order.status !== 'pending' }
                                     style={{ backgroundColor: order.status !== 'pending' ? 'rgb(100, 108, 255)' : 'default' }}
                                 >
-                                    {order.status === 'waiting' ? 'Applied' : 'Apply'}</button>
+                                    {order.status === 'waiting' ? 'Applied' : 'Apply'}
+                                    </button>
                             </td>
                         </tr>
                     ))}

@@ -1,4 +1,7 @@
-import { db } from "../index";
+import { db} from "../index";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 interface Application {
     id?: number;
@@ -153,6 +156,10 @@ export const orderslist = async () => {
                 client_id: clientId
             })
             .where('id', orderId);
+
+
+/////
+
     } catch (error) {
         console.error('Error updating application status:', error);
         throw new Error('Failed to update application status');

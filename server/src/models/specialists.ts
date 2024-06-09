@@ -1,4 +1,4 @@
-import { db } from "../index";
+import { db, transporter } from "../index";
 
 interface Order {
     id:number;
@@ -154,7 +154,7 @@ export const getApplication = async (orderId:number) => {
 };
 
 
-export const updateApplicationStatus = async (orderId: number, status: string, specialistId: number): Promise<void> => {
+export const updateApplicationStatus = async (orderId: number, status: string, specialistId: number, client_id: number): Promise<void> => {
     try {
         await db('applications')
             .update({
@@ -162,6 +162,32 @@ export const updateApplicationStatus = async (orderId: number, status: string, s
                 specialist_id: specialistId
             })
             .where('id', orderId);
+
+            if (status === 'waiting') {
+                const client = await db("clients")
+                    .select("email")
+                    .where('clients.id', client_id)
+                    .first();
+                    console.log(client);
+                              
+                if (client) {
+    
+                    const mailOptions = {
+                        from: process.env.EMAIL,
+                        to: client.email,
+                        subject: 'Your application status has changed',
+                        text: "Dear client, we've found you a specialist, you can get his phone number after approval. Please check your dashboard for more details."
+                    };
+    
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            console.error('Error sending email:', error);
+                        } else {
+                            console.log('Email sent:', info.response);
+                        }
+                    });
+                }
+            }
     } catch (error) {
         console.error('Error updating application status:', error);
         throw new Error('Failed to update application status');
